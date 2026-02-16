@@ -21,7 +21,7 @@ class Particle {
 	bool still; // stationary
 
 	public:
-	Particle(float row1, float col2, ParticleType Type);
+	Particle(float row1, float col1, ParticleType Type);
 
 	float getRow() const;
 	float getCol() const;
