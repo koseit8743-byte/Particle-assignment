@@ -15,6 +15,7 @@ enum class ParticleType {
 };
 
 class World;
+
 class Particle {
 	private:
 		float row, col;  // location
@@ -29,6 +30,7 @@ class Particle {
 
 	public:
 		Particle(float row1, float col1, ParticleType Type);
+
 
 		float getRow() const;
 		float getCol() const;
