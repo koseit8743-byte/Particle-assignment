@@ -38,6 +38,11 @@ int Particle::getLifetime() const {
 	return lifetime;
 }
 
+void Physics(World& physics) {
+	float x_vel = 0;
+	float y_vel = -9.8; //this should default to gravity (otherwise user can eidt it)
+	}
+
 void Particle::getColor( uint8_t & r, uint8_t & g, uint8_t & b) const{
 r = red;
 g = green;
@@ -56,3 +61,4 @@ void Particle::setColor(uint8_t Red, uint8_t Green, uint8_t Blue){
 	red = Red;
 	green = Green;
 	blue = Blue;
+}
