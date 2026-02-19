@@ -56,3 +56,4 @@ void Particle::setColor(uint8_t Red, uint8_t Green, uint8_t Blue){
 	red = Red;
 	green = Green;
 	blue = Blue;
+
