@@ -1,5 +1,5 @@
 #include "Particle.h"
-
+#include "Colors.h"
 #include <cstdint>
 #include <numeric>
 #include <sys/types.h>
@@ -12,6 +12,11 @@ Particle::Particle(float row1, float col1, ParticleType Type){
 	y_vel = 0.0f;
 	lifetime = -1;
 
+	Color color = ParticleColor(type);
+
+	red = color.red;
+	green = color.green;
+	blue = color.blue;
 }
 
 float Particle::getRow() const{
