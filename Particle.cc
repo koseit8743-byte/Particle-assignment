@@ -1,5 +1,6 @@
 #include "Particle.h"
 #include "World.h"
+#include "Colors.h"
 #include <cstdint>
 #include <numeric>
 #include <sys/types.h>
@@ -12,6 +13,11 @@ Particle::Particle(float row1, float col1, ParticleType Type){
 	y_vel = 0.0f;
 	lifetime = -1;
 
+	Color color = ParticleColor(type);
+
+	red = color.red;
+	green = color.green;
+	blue = color.blue;
 }
 
 int Particle::getRow() const{
@@ -33,9 +39,11 @@ float Particle::getXvel() const {
 	return x_vel;
 }
 
-float Particle::getYvel() const {
+float Particle::getYvel() const{
 	return y_vel;
 }
+
+
 int Particle::getLifetime() const {
 	return lifetime;
 }
@@ -101,3 +109,8 @@ void Particle::setColor(uint8_t Red, uint8_t Green, uint8_t Blue){
 
 	} */
 
+
+void Particle::setVel( float xvel, float yvel){
+	x_vel = xvel;
+	y_vel = yvel;
+}
