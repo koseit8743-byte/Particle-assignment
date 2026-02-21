@@ -6,7 +6,8 @@
 #include <NonBlockingGame.h>
 //Bridges Color Names
 #include "NamedColor.h"
-//Not sure yet but will need *shrug*
+//Not sure yet but will need *shrug* 
+//I think "NamedSymbol.h" is included in <NonBlockingGame.h>
 #include "NamedSymbol.h"
 
 #include <string>
@@ -22,10 +23,23 @@ public:
 	void GameLoop() override;
 
 private:
-void FPSdelay();
+void FPSdelay(int frame_start);
 void render();
 static void Physics();
 void InputControls();
+
+static const int Board_Rows = 32;
+static const int Board_Columns = 32;
+static const int Hud_Space = 3;
+int Mouse_X = 0;
+int Mouse_Y = 0;
+
+static bool Pause = true;
+string SaveFile = "Game.txt";
+int frames = 0;
+int fps = 5;
+
+
 
 World world;
 
