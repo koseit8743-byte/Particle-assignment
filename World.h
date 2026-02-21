@@ -1,24 +1,31 @@
 #pragma once
 #include "Particle.h"
 #include <list>
+#include <vector>
+using namespace std;
 
 
 class World {
 	private:
 	int rows = 0;
 	int columns = 0;
-	std::list<Particle> Parts;
+	vector<vector<char>> World_Map;
+	list<Particle> Parts;
  	public: 
-	World(int World_rows, int World_columns) : rows(World_rows), columns(World_columns) {};	
-	 const std::list<Particle> getParts const {
-		return Parts;
-	 }  
-	
-	
-	
+//	World(int World_rows, int World_columns) : rows(World_rows), columns(World_columns) {};	
+	World();	
+	friend class World_Particles;
+	void GetRows() const;
+	void GetColumns() const;
+	void SetrRows(int World_rows);
+	void SetColumns(int World_columns);
 
 	
-	
+	char get_Map_Location(vector<vector<char>> &World_Map, size_t rows, size_t columns);
+
+	void Boundaries();		
+
+	void Game_Map();		
 };
 //If the particle goes out of bounds -> call a destructor on it or something
 //std::list<int> particle-> holds all of the particles in the world

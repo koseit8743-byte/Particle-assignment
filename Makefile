@@ -5,7 +5,7 @@ a.out: main.o Particle.o World.o Game.o
 main.o: main.cc Particle.h World.h Game.h
 	g++ -c main.cc
 
-Particle.o: Particle.cc Particle.h
+Particle.o: Particle.cc Particle.h World.h
 	g++ -c Particle.cc
 
 Game.o: Game.cc Game.h Particle.h
