@@ -23,6 +23,27 @@ void World::Boundaries() {
 	columns = Cols - 1;
 }
 
+int World::size() const { 
+	return Part_World.size();
+}
+
+int World::alive_count() {
+	int alive = 0;
+for (auto temp = Part_World.begin(); temp != Part_World.end(); temp++) {
+		if (temp->getLifetime() != 0) { 
+			alive++;
+	}
+	else if (temp->getLifetime() == 0)
+		temp = Part_World.erase(temp);
+	}
+	return alive;
+}
+
+
+bool World::isEmpty(int rows, int columns) {
+	if (rows > World_Map.size() or columns > World_Map.size()) 
+			return false;	
+}
 
 void World::Game_Map() {
 	clearscreen();	

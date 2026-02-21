@@ -48,31 +48,49 @@ int Particle::getLifetime() const {
 	return lifetime;
 }
 
-void Particle::Physics(World& World_Map) { 
+void Particle::Physics(World& World_Map) {		
+	col += x_vel; //this allows the x velocity to change
+	row += y_vel; //this allows the y velocity to change		
 
-	if (lifetime > 0) lifetime--;
+	if (lifetime > 0) lifetime--; //decrements lifetime
 
-	/*	if (type == ParticleType::AIR)
+	if (type == ParticleType::AIR) { 
+		if (x_vel >= y_vel) 
+			y_vel = 1.3f;
+		if (y_vel >= x_vel) 
+			x_vel = 1.2f;
+		if (y_vel == 0)
+			y_vel *= -1;
+		if (x_vel == 0)
+			x_vel *= -1;
+	}
+	if (type == ParticleType::DIRT) { 
+		y_vel = -1;
+		if (y_vel == 0) 
+		isStill();
+	} 
+	if (type == ParticleType::FIRE) { //If fire explodes maybe add particles in different directions to each one 
+		isStill();
+	//	isTouching();
+	}
 
-		if (type == ParticleType::DIRT) 
-
-		if (type == ParticleType::FIRE) { 
-
+	if (type == ParticleType::EARTH) { 
+		lifetime = -1;
+		isStill();
+		lifetime = -1;
+	}
+	if (type == ParticleType::WATER) {
+		lifetime = 10;
+		 if (World_Map.isEmpty(row, col + 1)) { //Should check to see if the spot to the right is open
+			x_vel = 0;
+			y_vel = -1;
 		}
+		 else if (World_Map.isEmpty(row, col - 1)) { 
+			x_vel = 0;
+			y_vel = -1;
+		 }
+	}
 
-		if (type == ParticleType::FIRE) {
-
-		}
-
-		if (type == ParticleType::EARTH) 
-
-
-
-	//Particle* set_velocity.at(x_vel,y_vel);
-	if (it->getType() == ParticleType::AIR)		
-	this->set_velocity(0,9.8);
-
-*/
 }
 
 void Particle::getColor( uint8_t & r, uint8_t & g, uint8_t & b) const{
@@ -87,6 +105,8 @@ void Particle::setRow(float r, float c) {
 
 void Particle::setStill(bool isStill){
 	still = isStill;
+	if (x_vel == 0 && y_vel == 0) 
+		isStill = true;
 }
 void Particle::setLifetime(int frames){ lifetime = frames;}
 
