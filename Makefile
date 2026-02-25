@@ -1,6 +1,6 @@
 #target: dependencies
-a.out: main.o Particle.o World.o Game.o
-	g++ main.o Particle.o World.o Game.o
+a.out: main.o Particle.o World.o Game.o Bridges.o
+	g++ main.o Particle.o World.o Game.o Bridges.o -lbridges
 
 main.o: main.cc Particle.h World.h Game.h
 	g++ -c main.cc
@@ -14,6 +14,8 @@ Game.o: Game.cc Game.h Particle.h
 World.o: World.cc World.h Particle.h
 	g++ -c World.cc
 
-clean:
-	rm -rf a.out main.o Particle.o World.o Game.o
+Bridges.o: Bridges.cc Bridges.h
+	g++ -c Bridges.cc
 
+clean:
+	rm -rf a.out main.o Particle.o World.o Game.o Bridges.o
