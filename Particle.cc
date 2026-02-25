@@ -1,4 +1,5 @@
 #include "Particle.h"
+#include "World.h"
 #include "Colors.h"
 #include <cstdint>
 #include <numeric>
@@ -19,17 +20,19 @@ Particle::Particle(float row1, float col1, ParticleType Type){
 	blue = color.blue;
 }
 
-float Particle::getRow() const{
-return row;
+int Particle::getRow() const{
+	return row;
 }
-float Particle::getCol()const{return col;}
+int Particle::getCol()const{
+	return col;
+}
 
 ParticleType Particle::getType() const {
 	return type;
 }
 
 bool Particle::isStill() const{
-return still;
+	return still;
 }
 
 float Particle::getXvel() const {
@@ -45,15 +48,55 @@ int Particle::getLifetime() const {
 	return lifetime;
 }
 
-void Physics(World& physics) {
-	float  x_vel = 0;
-	float  y_vel = -9.8; //this should default to gravity (otherwise user can eidt it)
+void Particle::Physics(World& World_Map) {		
+	col += x_vel; //this allows the x velocity to change
+	row += y_vel; //this allows the y velocity to change		
+
+	if (lifetime > 0) lifetime--; //decrements lifetime
+
+	if (type == ParticleType::AIR) { 
+		if (x_vel >= y_vel) 
+			y_vel = 1.3f;
+		if (y_vel >= x_vel) 
+			x_vel = 1.2f;
+		if (y_vel == 0)
+			y_vel *= -1;
+		if (x_vel == 0)
+			x_vel *= -1;
+	}
+	if (type == ParticleType::DIRT) { 
+		y_vel = -1;
+		if (y_vel == 0) 
+		isStill();
+	} 
+	if (type == ParticleType::FIRE) { //If fire explodes maybe add particles in different directions to each one 
+		isStill();
+	//	isTouching();
 	}
 
+	if (type == ParticleType::EARTH) { 
+		lifetime = -1;
+		isStill();
+		lifetime = -1;
+	}
+	if (type == ParticleType::WATER) {
+		lifetime = 10;
+		 if (World_Map.isEmpty(row, col + 1)) { //Should check to see if the spot to the right is open
+			x_vel = 0;
+			y_vel = -1;
+		}
+		 else if (World_Map.isEmpty(row, col - 1)) { 
+			x_vel = 0;
+			y_vel = -1;
+		 }
+	}
+
+}
+
 void Particle::getColor( uint8_t & r, uint8_t & g, uint8_t & b) const{
-r = red;
-g = green;
-b  = blue;
+	r = red;
+	g = green;
+	b  = blue;
 }
 void Particle::setRow(float r, float c) {
 	row = r;
@@ -62,13 +105,30 @@ void Particle::setRow(float r, float c) {
 
 void Particle::setStill(bool isStill){
 	still = isStill;
+	if (x_vel == 0 && y_vel == 0) 
+		isStill = true;
 }
 void Particle::setLifetime(int frames){ lifetime = frames;}
+
+ParticleType Particle::setType(ParticleType newType) { 
+	type = newType;
+	return type;
+}
+
 void Particle::setColor(uint8_t Red, uint8_t Green, uint8_t Blue){
 	red = Red;
 	green = Green;
 	blue = Blue;
 }
+//bool Particle::isTouching() 
+/*	//Particle* touching at(int r, int c);
+	//for (int i = 0; i < World_Map.size(); i++) 
+	if (touching != nullptr) {
+	if (touching->getType() == ParticleType::WATER)
+	touching->setType(ParticleType::AIR);
+
+	} */
+
 
 void Particle::setVel( float xvel, float yvel){
 	x_vel = xvel;
