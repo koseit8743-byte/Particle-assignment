@@ -2,6 +2,7 @@
 #include "World.h"
 #include <ColorGrid.h>
 #include "Particle.h"
+#include<string>
 using namespace std;
 VisualBridges::VisualBridges(int assign, string username, string APIkey) : bridges(assign, username, APIkey){
 	bridges.setTitle("Particle Simlation");

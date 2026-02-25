@@ -1,6 +1,7 @@
 #include "Particle.h"
 #include "World.h"
 #include "Colors.h"
+#include <condition_variable>
 #include <cstdint>
 #include <numeric>
 #include <sys/types.h>
@@ -55,43 +56,104 @@ void Particle::Physics(World& World_Map) {
 	if (lifetime > 0) lifetime--; //decrements lifetime
 
 	if (type == ParticleType::AIR) { 
-		if (x_vel >= y_vel) 
-			y_vel = 1.3f;
-		if (y_vel >= x_vel) 
-			x_vel = 1.2f;
-		if (y_vel == 0)
-			y_vel *= -1;
-		if (x_vel == 0)
-			x_vel *= -1;
-	}
-	if (type == ParticleType::DIRT) { 
-		y_vel = -1;
-		if (y_vel == 0) 
-		isStill();
-	} 
-	if (type == ParticleType::FIRE) { //If fire explodes maybe add particles in different directions to each one 
-		isStill();
-	//	isTouching();
-	}
+	//	if (x_vel >= y_vel) 
+	//		y_vel = 1.3f;
+	//	if (y_vel >= x_vel) 
+	//		x_vel = 1.2f;
+	//	if (y_vel == 0)
+	//		y_vel *= -1;
+	//	if (x_vel == 0)
+	//
+	// x_vel *= -1;
+		//air moves in a strgiht line, boucning off solid
+		float airRow = row + y_vel;
+		float airCol = col + x_vel;
 
-	if (type == ParticleType::EARTH) { 
-		lifetime = -1;
-		isStill();
-		lifetime = -1;
-	}
-	if (type == ParticleType::WATER) {
-		lifetime = 10;
-		 if (World_Map.isEmpty(row, col + 1)) { //Should check to see if the spot to the right is open
-			x_vel = 0;
-			y_vel = -1;
+		if(World_Map.at(airRow, airCol) == nullptr){
+			row = airRow;
+			col = airCol;
 		}
-		 else if (World_Map.isEmpty(row, col - 1)) { 
-			x_vel = 0;
-			y_vel = -1;
-		 }
+		else { 
+			x_vel *= -1;
+			y_vel *= -1;
+	}
+	
+
+	if (type == ParticleType::DIRT) {
+		if (World_Map.at(row + 1, col) == nullptr){
+				row = row + 1;
+				}
+	else if ( World_Map.at(row + 1, col - 1) == nullptr){
+			row = row + 1;
+			col -= 1;
+			}
+	else if (World_Map.at(row + 1, col + 1) == nullptr){
+			row += 1;
+			col = col + 1;
+			}
+			
+	}
+	
+	else if(type == ParticleType::DUST){
+		if(World_Map.at(row + 1, col) == nullptr){
+			row = row + 1;
+		}
+		
+		if ( rand() % 2 == 0) { 
+			if (World_Map.at(row, col - 1 ) == nullptr ){
+				col -= 1;}
+				else {
+					if (World_Map.at( row, col + 1 ) == nullptr) { col = col+1;}
+				}
+			}
+	}
+	
+	else if (type == ParticleType::FIRE) {
+		if (rand () % 100 < 7) {
+		//If fire explodes maybe add particles in different directions to each one 
+	}
 	}
 
-}
+   else	if (type == ParticleType::EARTH) {
+	}
+	else if ( type == ParticleType::LIGHTNING){
+	if (lifetime <= 0 ) return;
+
+	float LightRow = row + y_vel;
+	float LightCol = col + x_vel;
+	Particle* HIT = World_Map.at(LightRow, LightCol);
+	if (HIT == nullptr) { 
+	row = LightRow;
+	col = LightCol;
+	}
+	else {
+	touch(*HIT);
+	   lifetime = 0;
+	   }
+	}
+	else if (type == ParticleType::WATER) {
+		lifetime = -1;
+		if(World_Map.at(row + 1, col)) == nullptr){ 
+			row += 1;
+		}
+		else if(World_Map.at(row + 1, col -1) == nullptr){
+			row = row + 1; 
+			col -= 1;
+		}
+		else if(World_Map.at(row + 1, col +1 ) == nullptr){
+			row += 1;
+			col = col + 1;
+		}
+
+		else if(World_Map.at(row , col + 1) == nullptr){
+			col += 1;
+		}
+		else if(World_Map.at(row, col - 1) == nullptr){
+			col -= 1;
+		}
+	}
+
+
 
 void Particle::getColor( uint8_t & r, uint8_t & g, uint8_t & b) const{
 	r = red;
