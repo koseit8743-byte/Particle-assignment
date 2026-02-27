@@ -45,9 +45,9 @@ class Particle {
 		void setStill(bool isStill);
 		void setVel(float xval, float yval);
 		void setLifetime(int frames); //amount of frames is supposed to exst for
-		ParticleType setType(ParticleType newType);
 	  // void(touch 
 	void isTouching(Particle& ParticleType, World& World_Map);
+		void isTouching(Particle& ParticleType, World& World_Map);
 		void Physics(World& World_Map);
 };
 

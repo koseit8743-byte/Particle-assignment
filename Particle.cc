@@ -112,6 +112,13 @@ void Particle::Physics(World& World_Map) {
 		if (rand () % 100 < 7) {
 		//If fire explodes maybe add particles in different directions to each one 
 	}
+	if (type == ParticleType::DIRT) { 
+		y_vel = -1;
+		if (y_vel == 0 and x_vel == 0) 
+		setStill(true);
+	} 
+	if (type == ParticleType::FIRE) { //If fire explodes maybe add particles in different directions to each one 
+	//	isTouching();
 	}
 
    else	if (type == ParticleType::EARTH) {

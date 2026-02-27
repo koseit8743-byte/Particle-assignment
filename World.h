@@ -21,7 +21,7 @@ class World {
    return columns;
      }
 
-void SetRows(int World_rows) {
+	void SetRows(int World_rows) {
 		rows = World_rows;
 	}
 	void SetColumns(int World_columns) { 
@@ -39,10 +39,8 @@ void SetRows(int World_rows) {
 	void Game_Map();	
 
 
-
 	char get_Map_Location(vector<vector<char>> &World_Map, size_t World_rows, size_t World_columns); 
 	void isInside();
-	void Game_Map();
 };
 //If the particle goes out of bounds -> call a destructor on it or something
 //std::list<int> particle-> holds all of the particles in the world
