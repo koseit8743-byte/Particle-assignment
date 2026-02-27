@@ -39,6 +39,17 @@ class World {
 	void Game_Map();	
 
 
+ void addParticle(const Particle& P) {
+	 Parts.push_back(P);
+ }
+
+ void physics() {
+	 for( auto& P : Parts){
+		 P.Physics (*this);
+		 alive_count();
+	isInside();
+	 }
+ }
 	char get_Map_Location(vector<vector<char>> &World_Map, size_t World_rows, size_t World_columns); 
 	void isInside();
 };
