@@ -18,7 +18,7 @@ class World;
 
 class Particle {
 	private:
-		int row, col;  // location
+		float row, col;  // location
 		float x_vel, y_vel; // velocity/ movement for x and y
 		uint8_t red, green, blue;
 		int lifetime;
@@ -26,7 +26,7 @@ class Particle {
 		bool still; // stationary
 
 	public:
-		Particle(int row1, int col1, ParticleType Type);
+		Particle(float row1, float  col1, ParticleType Type);
 
 
 		float getRow() const;

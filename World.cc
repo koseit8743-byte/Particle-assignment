@@ -15,7 +15,6 @@ Particle* World::at(float row, float col) {
 			Particle* location = &*temp;
 			return location;
 		}
-		else
 		return nullptr;
 	}
 }
@@ -59,9 +58,9 @@ void World::isInside() {
 	}
 }
 
-bool World::isEmpty(int rows, int columns) {
-	if (rows > World_Map.size() or columns > World_Map.size()) 
-			return false;	
+bool World::isEmpty(int r, int col) {
+  if(r < 0 ||  r >= rows || col < 0 || col  >= columns) return false;
+  return (at(r, col)) == nullptr;
 }
 
 char World::get_Map_Location(vector<vector<char>> &World_Map, size_t World_rows, size_t World_columns) { 
