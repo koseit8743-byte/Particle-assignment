@@ -160,7 +160,6 @@ void Particle::Physics(World& World_Map) {
 		lifetime = -1;
 		if(World_Map.at(row + 1, col) == nullptr){ 
 			row += 1;
-			col = col + 1;
 		}
 		else if(World_Map.at(row + 1, col -1) == nullptr){
 			row = row + 1; 
