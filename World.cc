@@ -3,6 +3,7 @@
 #include "World.h"
 #include "Particle.h"
 #include "/public/colors.h"
+#include <fstream>
 using namespace std;
 
 World::World() {
@@ -78,7 +79,41 @@ void World::Game_Map() {
 	}
 	cout << endl;
 	}
-} //l
+}
+
+
+
+void World::Load(string SaveFile) {
+	Parts.clear();
+	ifstream file(SaveFile);
+		if (file.eof()) {
+			return; 
+		}
+		else { 
+			Parts = World_Parts;
+		}
+	}	
+
+
+void World::Save() { 
+	World_Parts = Parts;
+}
+
+void World::add(Particle holder) { 
+		Parts.emplace_back(holder);
+}
+/*void World::Save(string SaveFile) { 
+		ofstream upload(SaveFile);
+		if (upload.eof())
+			return; 
+		
+		upload << rows << " " << columns;
+		for (const auto &temp : Parts) {
+			uint8_t Color = temp.getColor(uint8_t red, uint8_t green, uint8_t blue);
+			upload << static_cast<int>(temp.getType()) << " " << temp.getRow() << " " << temp.getCol() << " " << temp.getXvel() << " " << temp.getYvel() << " " <<  static_cast<int>(Color) << " " << temp.isStill() << " " << temp.getLifetime();			
+		} */
+	
+ 
 	
 
 

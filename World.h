@@ -11,6 +11,7 @@ class World {
 	float columns = 0;
 	vector<vector<char>> World_Map;
 	list<Particle> Parts;
+	list<Particle> World_Parts;
  	public: 
 //	World(int World_rows, int World_columns) : rows(World_rows), columns(World_columns) {};	
 	World();
@@ -37,7 +38,9 @@ class World {
 	void Boundaries();		
 	bool isEmpty(int rows, int columns);
 	void Game_Map();	
-
+	void Load(string SaveFile);
+	void Save();
+	void add(Particle holder);
 
  void addParticle(const Particle& P) {
 	 Parts.push_back(P);

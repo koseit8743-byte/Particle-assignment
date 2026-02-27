@@ -53,7 +53,7 @@ int Particle::getLifetime() const {
  void Particle::getColor(uint8_t & r, uint8_t & g, uint8_t & b) const{
      r = red;
      g = green;
-     b  = blue;
+     b = blue;
   }
 void Particle::setRow(float r, float c) {
      row = r;
@@ -91,7 +91,7 @@ void Particle::Physics(World& World_Map) {
 	if (type == ParticleType::AIR) { 
 		float airRow = row + y_vel;
 		float airCol = col + x_vel;
-		if(World_Map.at(airRow, airCol) == nullptr){
+		if (World_Map.at(airRow, airCol) == nullptr){
 			row = airRow;
 			col = airCol;
 		}
@@ -116,7 +116,7 @@ void Particle::Physics(World& World_Map) {
 			
 	}
 	
-	else if(type == ParticleType::DUST){
+	else if (type == ParticleType::DUST){
 		setStill(false);
 		if(World_Map.at(row + 1, col) == nullptr){
 			row = row + 1;
