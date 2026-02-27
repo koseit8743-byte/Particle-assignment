@@ -90,7 +90,7 @@ void Particle::Physics(World& World_Map) {
 
 	if (type == ParticleType::AIR) { 
 		float airRow = row + y_vel;
-
+		float airCol = col + x_vel;
 		if(World_Map.at(airRow, airCol) == nullptr){
 			row = airRow;
 			col = airCol;
