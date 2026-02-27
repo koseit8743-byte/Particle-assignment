@@ -14,7 +14,7 @@ Particle* World::at(float row, float col) {
 		if (temp->getRow() == row and temp->getCol() == col) {
 			Particle* location = &*temp;
 			return location;
-	}
+		}
 		else return nullptr;
 	}
 }
