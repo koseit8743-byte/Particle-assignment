@@ -15,7 +15,8 @@ Particle* World::at(float row, float col) {
 			Particle* location = &*temp;
 			return location;
 		}
-		else return nullptr;
+		else
+		return nullptr;
 	}
 }
 
@@ -23,13 +24,6 @@ list <Particle> World::Elements() const {
 	return Parts;
 }
 
-char World::get_Map_Location(vector<vector<char>>& World_Map, size_t rows, size_t columns) {
-		
-	if (rows >= World_Map.size() or columns >= World_Map.size())
-		return 0;
-	else 
-		return World_Map[rows][columns];
-}
 
 void World::Boundaries() {	
 	const auto [ROWS,COLS] = get_terminal_size();
@@ -70,19 +64,22 @@ bool World::isEmpty(int rows, int columns) {
 			return false;	
 }
 
+char World::get_Map_Location(vector<vector<char>> &World_Map, size_t World_rows, size_t World_columns) { 
+	if (World_rows >= World_Map.size() or World_columns >= World_Map[World_rows].size())
+		return ' ';
+	else 
+		return World_Map[World_rows][World_columns];
+}
+
 void World::Game_Map() {
 	clearscreen();	
 	for (size_t i = 0; i < World_Map.size(); i++) { 
 		for (size_t j = 0; j < World_Map[i].size(); j++) {
-		World_Map[rows][columns] = ' ';
-		}
-		cout << endl;	
+		World_Map[i][j] = ' '; //This will print out spaces in the terminal so we can visually see the particle
+	}
+	cout << endl;
 	}
 }
-
 	
-//void World::Boundaries(list ) 
-//	Parts.emplace_back(ParticleType);
-//	auto temp = Parts.begin();	
 
 
