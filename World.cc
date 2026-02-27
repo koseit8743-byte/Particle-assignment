@@ -7,9 +7,6 @@ using namespace std;
 
 World::World() {
 	Boundaries();
-	const auto [ROWS,COLS] = get_terminal_size();
-	 rows = ROWS;
-     columns = COLS;
 }
 
 Particle* World::at(float row, float col) {
@@ -46,12 +43,14 @@ int World::size() const {
 
 int World::alive_count() {
 	int alive = 0;
-for (auto temp = Parts.begin(); temp != Parts.end(); temp++) { //double check if this should be a different loop
+	auto temp = Parts.begin();
+	while (temp != Parts.end()) { //double check if this should be a different loop
 	 if (temp->getLifetime() == 0) {
 		temp = Parts.erase(temp);
 	}
 else if (temp->getLifetime() > 0) {
 	alive++;
+	temp++;
 	}
  }
 	return alive;
