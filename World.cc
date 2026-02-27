@@ -2,6 +2,7 @@
 #include <vector> // IWYU pragma: keep
 #include "World.h"
 #include "Particle.h"
+#include <string>
 #include "/public/colors.h"
 using namespace std;
 
@@ -15,9 +16,8 @@ Particle* World::at(float row, float col) {
 			Particle* location = &*temp;
 			return location;
 		}
-		else
-		return nullptr;
 	}
+	return nullptr;
 }
 
 list <Particle> World::Elements() const {
