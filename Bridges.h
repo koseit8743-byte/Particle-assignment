@@ -1,5 +1,5 @@
   #ifndef BRIDGES_H
-  #define BRIDGESH
+  #define BRIDGES_H
 
    #include <Bridges.h>
   
