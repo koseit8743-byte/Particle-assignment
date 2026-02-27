@@ -78,7 +78,7 @@ void World::Game_Map() {
 	}
 	cout << endl;
 	}
-}
+} //l
 	
 
 
