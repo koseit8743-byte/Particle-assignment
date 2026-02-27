@@ -31,7 +31,23 @@ class World {
 	int alive_count();
 	void Boundaries();		
 	bool isEmpty(int rows, int columns);
-	void Game_Map();		
+	void Game_Map();	
+
+	int getRows() const{ 
+		return rows;
+	}
+	int getCols() const{
+		return columns;
+	}
+
+	// Particle* at(int row, int col){
+		for (auto& k : Part_World){
+			if((k.getRow() == row) && (k.getCol() == col))
+				return &k;
+		}
+   return nullptr;
+}
+
 };
 //If the particle goes out of bounds -> call a destructor on it or something
 //std::list<int> particle-> holds all of the particles in the world

@@ -18,7 +18,7 @@ class World;
 
 class Particle {
 	private:
-		int row, col;  // location
+		float row, col;  // location
 		int x, y;
 		float x_vel, y_vel; // velocity/ movement for x and y
 		uint8_t red, green, blue;
@@ -47,7 +47,7 @@ class Particle {
 		void setVel(float xval, float yval);
 		void setLifetime(int frames); //amount of frames is supposed to exst for
 		ParticleType setType(ParticleType newType);
-	//	bool isTouching();
+	  // void(touch
 		void Physics(World& World_Map);
 };
 
