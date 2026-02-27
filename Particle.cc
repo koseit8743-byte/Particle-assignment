@@ -89,22 +89,8 @@ void Particle::Physics(World& World_Map) {
 	if (lifetime > 0) lifetime--; //decrements lifetime
 
 	if (type == ParticleType::AIR) { 
-<<<<<<< HEAD
-		//air moves in a strgiht line, boucning off solid
-=======
->>>>>>> fb61159e8d7c22ba8b20ab34faf8b04c2c7cea72
 		float airRow = row + y_vel;
-		float airCol = col + x_vel;
-		 if(World_Map.at(airRow, airCol) == nullptr){
-          row = airRow;
-          col = airCol;
-        }
-        else {
-          x_vel *= -1;
-           y_vel *= -1;
-     }
 
-<<<<<<< HEAD
 		if(World_Map.at(airRow, airCol) == nullptr){
 			row = airRow;
 			col = airCol;
@@ -113,18 +99,9 @@ void Particle::Physics(World& World_Map) {
 			x_vel *= -1;
 			y_vel *= -1;
 		}
-=======
->>>>>>> fb61159e8d7c22ba8b20ab34faf8b04c2c7cea72
 	}
-
-	
-
-<<<<<<< HEAD
 	if (type == ParticleType::DIRT) {
 		setStill(true);
-=======
-	else if (type == ParticleType::DIRT) {
->>>>>>> fb61159e8d7c22ba8b20ab34faf8b04c2c7cea72
 		if (World_Map.at(row + 1, col) == nullptr){
 				row = row + 1;
 				}
@@ -156,8 +133,7 @@ void Particle::Physics(World& World_Map) {
 	
 	else if (type == ParticleType::FIRE) {
 		if (rand () % 100 < 7) {
-		//If fire explodes maybe add particles in different directions to each one 
-<<<<<<< HEAD
+		//If fire explodes maybe add particles in different directions to each one
 			float FireRow = row;
 			float FireCol = col;
 			Particle* Touch = World_Map.at(FireRow, FireCol);
@@ -169,9 +145,6 @@ void Particle::Physics(World& World_Map) {
 				isTouching(*Touch, World_Map);
 			}
 		}
-=======
-	}
->>>>>>> fb61159e8d7c22ba8b20ab34faf8b04c2c7cea72
 	}
 
    else	if (type == ParticleType::EARTH) {
@@ -194,11 +167,7 @@ void Particle::Physics(World& World_Map) {
 	}
 	else if (type == ParticleType::WATER) {
 		lifetime = -1;
-<<<<<<< HEAD
-		if ((World_Map.at(row + 1, col)) == nullptr){ 
-=======
 		if(World_Map.at(row + 1, col) == nullptr){ 
->>>>>>> fb61159e8d7c22ba8b20ab34faf8b04c2c7cea72
 			row += 1;
 		}
 		else if(World_Map.at(row + 1, col -1) == nullptr){
@@ -217,44 +186,14 @@ void Particle::Physics(World& World_Map) {
 			col -= 1;
 		}
 	}
-<<<<<<< HEAD
 }
 
-
-
-void Particle::getColor(uint8_t & r, uint8_t & g, uint8_t & b) const{
-	r = red;
-	g = green;
-	b  = blue;
-}
-void Particle::setRow(float r, float c) {
-	row = r;
-	col = c;
-}
-
-void Particle::setStill(bool isStill){
-	still = isStill;
-	if (x_vel == 0 && y_vel == 0) 
-		isStill = true;
-}
-
-void Particle::setLifetime(int frames){ lifetime = frames;}
-
-ParticleType Particle::setType(ParticleType newType) { 
-	type = newType;
-	return type;
-}
-
-void Particle::setColor(uint8_t Red, uint8_t Green, uint8_t Blue){
-	red = Red;
-	green = Green;
-	blue = Blue;
-}
+/*void Particle::isTouching(Particle& ParticleType, World& World_Map) { 
 =======
 }
 
->>>>>>> fb61159e8d7c22ba8b20ab34faf8b04c2c7cea72
-/*void Particle::isTouching(Particle& ParticleType, World& World_Map) { 
+void Particle::isTouching(Particle& ParticleType, World& World_Map) { 
+>>>>>>> ccba95baf876d9dc7c99c6a69c22ce67e12a714e
 		for (const auto& temp : World_Map.Elements()) {
 			if (ParticleType.getRow() == temp.getRow() and ParticleType.getCol() == temp.getCol() and ParticleType.getType() == ParticleType::FIRE and temp.getType() == ParticleType::WATER) {
 				type = ParticleType::AIR;		
@@ -272,7 +211,7 @@ void Particle::isTouching(Particle& Particle, World& World_Map) {
 		Particle.setType(ParticleType::AIR);
 	}
 	if (this->type == ParticleType::LIGHTNING and Particle.getType() == ParticleType::WATER) {
-		Particle.setType(ParticleType::LIGHTNING;
+		Particle.setType(ParticleType::LIGHTNING);
 	}
 	if (this->type == ParticleType::LIGHTNING and Particle.getType() == ParticleType::EARTH) { 
 		Particle.setType(ParticleType::DIRT);
