@@ -16,8 +16,8 @@ Particle* World::at(float row, float col) {
 			Particle* location = &*temp;
 			return location;
 		}
-		return nullptr;
 	}
+	 return nullptr;
 }
 
 list <Particle> World::Elements() const {
