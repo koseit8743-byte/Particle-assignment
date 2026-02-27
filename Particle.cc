@@ -120,6 +120,7 @@ void Particle::Physics(World& World_Map) {
 	}
 	
 	else if(type == ParticleType::DUST){
+		setStill(false);
 		if(World_Map.at(row + 1, col) == nullptr){
 			row = row + 1;
 		}
@@ -136,10 +137,21 @@ void Particle::Physics(World& World_Map) {
 	else if (type == ParticleType::FIRE) {
 		if (rand () % 100 < 7) {
 		//If fire explodes maybe add particles in different directions to each one 
-	}
+			float FireRow = row;
+			float FireCol = col;
+			Particle* Touch = World_Map.at(FireRow, FireCol);
+			if (Touch == nullptr) { 
+				row = (int)FireRow;
+				col = (int)FireCol;
+			}
+			else { 
+				isTouching(*Touch, World_Map);
+			}
+		}
 	}
 
    else	if (type == ParticleType::EARTH) {
+	   setStill(true);
 	}
 	else if ( type == ParticleType::LIGHTNING){
 	if (lifetime <= 0 ) return;
@@ -152,7 +164,7 @@ void Particle::Physics(World& World_Map) {
 	col = LightCol;
 	}
 	else {
-	touch(*HIT);
+	isTouching(*HIT, World_Map);
 	   lifetime = 0;
 	   }
 	}
@@ -180,10 +192,9 @@ void Particle::Physics(World& World_Map) {
 }
 
 void Particle::isTouching(Particle& ParticleType, World& World_Map) { 
-
 		for (const auto& temp : World_Map.Elements()) {
 			if (ParticleType.getRow() == temp.getRow() and ParticleType.getCol() == temp.getCol() and ParticleType.getType() == ParticleType::FIRE and temp.getType() == ParticleType::WATER) {
-			type = ParticleType::AIR;		
+				type = ParticleType::AIR;		
 			if (ParticleType.getRow() == temp.getRow() and ParticleType.getCol() == temp.getCol() and ParticleType.getType() == ParticleType::LIGHTNING and temp.getType() == ParticleType::WATER)
 				type = ParticleType::LIGHTNING;
 			if (ParticleType.getRow() == temp.getRow() and ParticleType.getCol() == temp.getCol() and ParticleType.getType() == ParticleType::LIGHTNING and temp.getType() == ParticleType::EARTH)
@@ -191,13 +202,7 @@ void Particle::isTouching(Particle& ParticleType, World& World_Map) {
 				
 		}
 	}
-	/*Particle* touching at(int r, int c);
-	//for (int i = 0; i < World_Map.size(); i++) 
-	if (touching != nullptr) {
-	if (touching->getType() == ParticleType::WATER)
-	touching->setType(ParticleType::AIR);
-	*/
-	} 
+} 
 
 
 
