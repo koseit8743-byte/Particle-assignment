@@ -100,6 +100,4 @@ Game() : NonBlockingGame(1, "myuserid", "myapikey", Board_Rows, Board_Columns),
 
 
 int main() {
-	Game game;
-	game.run();
 };

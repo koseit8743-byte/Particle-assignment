@@ -21,10 +21,10 @@ Particle::Particle(float row1, float col1, ParticleType Type){
 	blue = color.blue;
 }
 
-int Particle::getRow() const{
+float Particle::getRow() const{
 	return row;
 }
-int Particle::getCol()const{
+float Particle::getCol()const{
 	return col;
 }
 
@@ -112,6 +112,13 @@ void Particle::Physics(World& World_Map) {
 		if (rand () % 100 < 7) {
 		//If fire explodes maybe add particles in different directions to each one 
 	}
+	if (type == ParticleType::DIRT) { 
+		y_vel = -1;
+		if (y_vel == 0 and x_vel == 0) 
+		setStill(true);
+	} 
+	if (type == ParticleType::FIRE) { //If fire explodes maybe add particles in different directions to each one 
+	//	isTouching();
 	}
 
    else	if (type == ParticleType::EARTH) {
@@ -155,7 +162,7 @@ void Particle::Physics(World& World_Map) {
 
 
 
-void Particle::getColor( uint8_t & r, uint8_t & g, uint8_t & b) const{
+void Particle::getColor(uint8_t & r, uint8_t & g, uint8_t & b) const{
 	r = red;
 	g = green;
 	b  = blue;
@@ -182,14 +189,25 @@ void Particle::setColor(uint8_t Red, uint8_t Green, uint8_t Blue){
 	green = Green;
 	blue = Blue;
 }
-//bool Particle::isTouching() 
-/*	//Particle* touching at(int r, int c);
+void Particle::isTouching(Particle& ParticleType, World& World_Map) { 
+
+		for (const auto& temp : World_Map.Elements()) {
+			if (ParticleType.getRow() == temp.getRow() and ParticleType.getCol() == temp.getCol() and ParticleType.getType() == ParticleType::FIRE and temp.getType() == ParticleType::WATER) {
+			type = ParticleType::AIR;		
+			if (ParticleType.getRow() == temp.getRow() and ParticleType.getCol() == temp.getCol() and ParticleType.getType() == ParticleType::LIGHTNING and temp.getType() == ParticleType::WATER)
+				type = ParticleType::LIGHTNING;
+			if (ParticleType.getRow() == temp.getRow() and ParticleType.getCol() == temp.getCol() and ParticleType.getType() == ParticleType::LIGHTNING and temp.getType() == ParticleType::EARTH)
+				type = ParticleType::DIRT;
+				
+		}
+	}
+	/*Particle* touching at(int r, int c);
 	//for (int i = 0; i < World_Map.size(); i++) 
 	if (touching != nullptr) {
 	if (touching->getType() == ParticleType::WATER)
 	touching->setType(ParticleType::AIR);
-
-	} */
+	*/
+	} 
 
 
 void Particle::setVel( float xvel, float yvel){
