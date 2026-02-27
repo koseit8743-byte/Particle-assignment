@@ -19,8 +19,6 @@ class World;
 class Particle {
 	private:
 		float row, col;  // location
-		int x, y;
-		int row, col;  // location
 		float x_vel, y_vel; // velocity/ movement for x and y
 		uint8_t red, green, blue;
 		int lifetime;
@@ -28,7 +26,7 @@ class Particle {
 		bool still; // stationary
 
 	public:
-		Particle(int row1, int col1, ParticleType Type);
+		Particle(float row1, float  col1, ParticleType Type);
 
 
 		float getRow() const;
@@ -45,8 +43,7 @@ class Particle {
 		void setStill(bool isStill);
 		void setVel(float xval, float yval);
 		void setLifetime(int frames); //amount of frames is supposed to exst for
-	  // void(touch 
-	void isTouching(Particle& ParticleType, World& World_Map);
+		ParticleType setType(ParticleType newType);
 		void isTouching(Particle& ParticleType, World& World_Map);
 		void Physics(World& World_Map);
 };
