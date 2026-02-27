@@ -2,7 +2,7 @@
   #define BRIDGES_H
 
    #include <Bridges.h>
-  
+#include <string>  
   #include <ColorGrid.h>
   using namespace std;
  
