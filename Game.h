@@ -25,16 +25,18 @@ public:
 private:
 void FPSdelay(int frame_start);
 void render();
-static void Physics();
+void Physics();
 void InputControls();
 
 static const int Board_Rows = 32;
 static const int Board_Columns = 32;
 static const int Hud_Space = 3;
+static const int Hud_Rows = 3;
+
 int Mouse_X = 0;
 int Mouse_Y = 0;
 
-static bool Pause = true;
+ bool Pause;
 string SaveFile = "Game.txt";
 int frames = 0;
 int fps = 5;
