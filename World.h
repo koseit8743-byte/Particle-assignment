@@ -13,9 +13,14 @@ class World {
 	list<Particle> Parts;
  	public: 
 //	World(int World_rows, int World_columns) : rows(World_rows), columns(World_columns) {};	
-	World();	
-	void GetRows() const;
-	void GetColumns() const;
+	World();
+	  int getRows() const{
+       return rows;
+     }
+     int getCols() const{
+   return columns;
+     }
+
 	void SetRows(int World_rows) {
 		rows = World_rows;
 	}
@@ -31,9 +36,22 @@ class World {
 	int alive_count();
 	void Boundaries();		
 	bool isEmpty(int rows, int columns);
+	void Game_Map();	
+
+
+ void addParticle(const Particle& P) {
+	 Parts.push_back(P);
+ }
+
+ void physics() {
+	 for( auto& P : Parts){
+		 P.Physics (*this);
+		 alive_count();
+	isInside();
+	 }
+ }
 	char get_Map_Location(vector<vector<char>> &World_Map, size_t World_rows, size_t World_columns); 
 	void isInside();
-	void Game_Map();
 };
 //If the particle goes out of bounds -> call a destructor on it or something
 //std::list<int> particle-> holds all of the particles in the world
