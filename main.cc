@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-	Game game;
-	game.run();
+	Game Start;
+	Start.run();
 	return 0; 
 }

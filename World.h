@@ -30,7 +30,7 @@ World(int World_rows, int World_columns) : rows(World_rows), columns(World_colum
 	}
 
 	//char get_Map_Location(vector<vector<char>> &World_Map);
-	
+	World(int World_rows, int World_cols);	
 	Particle* at(float x, float y);
 	list <Particle> Elements() const;
 	int size() const;

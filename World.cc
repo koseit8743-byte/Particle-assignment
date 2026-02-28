@@ -6,8 +6,10 @@
 #include <fstream>
 using namespace std;
 
-World::World() {
+World::World(int World_rows, int World_cols) {
 	Boundaries();
+	rows = World_rows;
+	columns = World_cols;
 }
 
 Particle* World::at(float row, float col) {
@@ -27,7 +29,7 @@ list <Particle> World::Elements() const {
 
 void World::Boundaries() {	
 	const auto [ROWS,COLS] = get_terminal_size();
-	rows= ROWS - 1;
+	rows = ROWS - 1;
 	columns = COLS - 1;
 }
 

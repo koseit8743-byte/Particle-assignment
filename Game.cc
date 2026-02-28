@@ -90,6 +90,11 @@ if (ch == 'q' or ch == 'Q'){
 	commandPAUSE();
 	}
 		else if (ch == 's' or ch == 'S'){
+		world.Save();
+		}
+			else if (ch == 'l' or ch == 'L'){
+			pause = 1;
+			world.Load(SaveFile);
 		commandSAVE();
 		}
 			else if (ch == 'l' or ch == 'L'){
