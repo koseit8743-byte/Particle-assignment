@@ -6,6 +6,8 @@
 //Previous Header included "NonBlockingGame" from bridges. Upadated to use colors.h
 
 class Game {
+
+
 public:
 	Game();
 //Runs game
@@ -19,4 +21,5 @@ private:
 	int fps;
 
 World world;
+
 };
