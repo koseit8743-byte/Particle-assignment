@@ -31,7 +31,7 @@ void onMouseDown(int row, int col){
 	g_clickCol = col;
 }
 
-Game::Game() : world(1, 1) {
+Game::Game(){
 	pause=true;
 	frame = 0;
 	fps = 5;
@@ -62,7 +62,8 @@ int termCols = terminal.second;
 int worldRows = max(1, termRows - hudRows);
 int worldCols = max(1, termCols);
 
-world = World(worldRows, worldCols);
+world.SetRows(worldRows);
+world.SetColumns(worldCols);
 
 clearscreen();
 movecursor(1,1);
