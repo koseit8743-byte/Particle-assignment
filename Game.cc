@@ -32,8 +32,9 @@ const char Username = "";
 const char API = "";
 
 
-Game::Game() : bridges::game::NonBlockingGame(Assignment, Username, API, Board_Rows, Board_Columns)
-world(Board_Rows - Hud_Rows, Board_Columns)
+Game::Game() : bridges::game::NonBlockingGame(Assignment, Username, API, Board_Rows, Board_Columns),
+ world(Board_Rows - Hud_Rows, Board_Columns)
+	}
 //Starts game 
 virtual void initialize() override {
 setTitle("Particle Sim");
