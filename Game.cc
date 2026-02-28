@@ -195,8 +195,8 @@ void Game::commandFPSdown(){
 	fps = max(1, fps - 1);
 }
 void Game::commandBRIDGES(){
-	string user = ;//BridgesUser ""
-	string key = ;//BridgesKey ""
+	string user = "placeholder";//BridgesUser ""
+	string key = "placeholder";//BridgesKey ""
 	int assignmentId = 1;
 	
 	pause = true;
