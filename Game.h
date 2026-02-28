@@ -14,7 +14,6 @@ public:
 	void run();
 
 private:
-
 	bool pause;
 	string SaveFile;
 	int frames;

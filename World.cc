@@ -3,6 +3,7 @@
 #include "World.h"
 #include "Particle.h"
 #include "/public/colors.h"
+#include <fstream>
 using namespace std;
 
 World::World() {
@@ -15,9 +16,8 @@ Particle* World::at(float row, float col) {
 			Particle* location = &*temp;
 			return location;
 		}
-		else
-		return nullptr;
 	}
+	 return nullptr;
 }
 
 list <Particle> World::Elements() const {
@@ -59,9 +59,9 @@ void World::isInside() {
 	}
 }
 
-bool World::isEmpty(int rows, int columns) {
-	if (rows > World_Map.size() or columns > World_Map.size()) 
-			return false;	
+bool World::isEmpty(int r, int col) {
+  if(r < 0 ||  r >= rows || col < 0 || col  >= columns) return false;
+  return (at(r, col)) == nullptr;
 }
 
 char World::get_Map_Location(vector<vector<char>> &World_Map, size_t World_rows, size_t World_columns) { 
@@ -80,6 +80,40 @@ void World::Game_Map() {
 	cout << endl;
 	}
 }
+
+
+
+void World::Load(string SaveFile) {
+	Parts.clear();
+	ifstream file(SaveFile);
+		if (file.eof()) {
+			return; 
+		}
+		else { 
+			Parts = World_Parts;
+		}
+	}	
+
+
+void World::Save() { 
+	World_Parts = Parts;
+}
+
+void World::add(Particle holder) { 
+		Parts.emplace_back(holder);
+}
+/*void World::Save(string SaveFile) { 
+		ofstream upload(SaveFile);
+		if (upload.eof())
+			return; 
+		
+		upload << rows << " " << columns;
+		for (const auto &temp : Parts) {
+			uint8_t Color = temp.getColor(uint8_t red, uint8_t green, uint8_t blue);
+			upload << static_cast<int>(temp.getType()) << " " << temp.getRow() << " " << temp.getCol() << " " << temp.getXvel() << " " << temp.getYvel() << " " <<  static_cast<int>(Color) << " " << temp.isStill() << " " << temp.getLifetime();			
+		} */
+	
+ 
 	
 
 

@@ -4,6 +4,8 @@
 #include <condition_variable>
 #include <cstdint>
 #include <numeric>
+#include<cstdlib>
+
 #include <sys/types.h>
 Particle::Particle(float row1, float col1, ParticleType Type){
 	row = row1;
@@ -48,6 +50,37 @@ float Particle::getYvel() const{
 int Particle::getLifetime() const {
 	return lifetime;
 }
+ void Particle::getColor(uint8_t & r, uint8_t & g, uint8_t & b) const{
+     r = red;
+     g = green;
+     b = blue;
+  }
+void Particle::setRow(float r, float c) {
+     row = r;
+     col = c;
+  }
+
+ void Particle::setStill(bool isStill){
+    still = isStill;
+     if (x_vel == 0 && y_vel == 0)
+      isStill = true;
+  }
+ void Particle::setLifetime(int frames){ lifetime = frames;}
+
+ ParticleType Particle::setType(ParticleType newType) {
+     type = newType;
+     return type;
+  }
+
+ void Particle::setColor(uint8_t Red, uint8_t Green, uint8_t Blue){
+     red = Red;
+     green = Green;
+     blue = Blue;
+  }
+ void Particle::setVel( float xvel, float yvel){
+   x_vel = xvel;
+     y_vel = yvel;
+  }
 
 void Particle::Physics(World& World_Map) {		
 	col += x_vel; //this allows the x velocity to change
@@ -56,30 +89,19 @@ void Particle::Physics(World& World_Map) {
 	if (lifetime > 0) lifetime--; //decrements lifetime
 
 	if (type == ParticleType::AIR) { 
-	//	if (x_vel >= y_vel) 
-	//		y_vel = 1.3f;
-	//	if (y_vel >= x_vel) 
-	//		x_vel = 1.2f;
-	//	if (y_vel == 0)
-	//		y_vel *= -1;
-	//	if (x_vel == 0)
-	//
-	// x_vel *= -1;
-		//air moves in a strgiht line, boucning off solid
 		float airRow = row + y_vel;
 		float airCol = col + x_vel;
-
-		if(World_Map.at(airRow, airCol) == nullptr){
+		if (World_Map.at(airRow, airCol) == nullptr){
 			row = airRow;
 			col = airCol;
 		}
 		else { 
 			x_vel *= -1;
 			y_vel *= -1;
+		}
 	}
-	
-
 	if (type == ParticleType::DIRT) {
+		setStill(true);
 		if (World_Map.at(row + 1, col) == nullptr){
 				row = row + 1;
 				}
@@ -94,7 +116,8 @@ void Particle::Physics(World& World_Map) {
 			
 	}
 	
-	else if(type == ParticleType::DUST){
+	else if (type == ParticleType::DUST){
+		setStill(false);
 		if(World_Map.at(row + 1, col) == nullptr){
 			row = row + 1;
 		}
@@ -110,18 +133,22 @@ void Particle::Physics(World& World_Map) {
 	
 	else if (type == ParticleType::FIRE) {
 		if (rand () % 100 < 7) {
-		//If fire explodes maybe add particles in different directions to each one 
-	}
-	if (type == ParticleType::DIRT) { 
-		y_vel = -1;
-		if (y_vel == 0 and x_vel == 0) 
-		setStill(true);
-	} 
-	if (type == ParticleType::FIRE) { //If fire explodes maybe add particles in different directions to each one 
-	//	isTouching();
+		//If fire explodes maybe add particles in different directions to each one
+			float FireRow = row;
+			float FireCol = col;
+			Particle* Touch = World_Map.at(FireRow, FireCol);
+			if (Touch == nullptr) { 
+				row = (int)FireRow;
+				col = (int)FireCol;
+			}
+			else { 
+				isTouching(*Touch, World_Map);
+			}
+		}
 	}
 
    else	if (type == ParticleType::EARTH) {
+	   setStill(true);
 	}
 	else if ( type == ParticleType::LIGHTNING){
 	if (lifetime <= 0 ) return;
@@ -134,13 +161,13 @@ void Particle::Physics(World& World_Map) {
 	col = LightCol;
 	}
 	else {
-	touch(*HIT);
+	isTouching(*HIT, World_Map);
 	   lifetime = 0;
 	   }
 	}
 	else if (type == ParticleType::WATER) {
 		lifetime = -1;
-		if(World_Map.at(row + 1, col)) == nullptr){ 
+		if(World_Map.at(row + 1, col) == nullptr){ 
 			row += 1;
 		}
 		else if(World_Map.at(row + 1, col -1) == nullptr){
@@ -159,41 +186,17 @@ void Particle::Physics(World& World_Map) {
 			col -= 1;
 		}
 	}
-
-
-
-void Particle::getColor(uint8_t & r, uint8_t & g, uint8_t & b) const{
-	r = red;
-	g = green;
-	b  = blue;
-}
-void Particle::setRow(float r, float c) {
-	row = r;
-	col = c;
 }
 
-void Particle::setStill(bool isStill){
-	still = isStill;
-	if (x_vel == 0 && y_vel == 0) 
-		isStill = true;
-}
-void Particle::setLifetime(int frames){ lifetime = frames;}
-
-ParticleType Particle::setType(ParticleType newType) { 
-	type = newType;
-	return type;
+/*void Particle::isTouching(Particle& ParticleType, World& World_Map) { 
+=======
 }
 
-void Particle::setColor(uint8_t Red, uint8_t Green, uint8_t Blue){
-	red = Red;
-	green = Green;
-	blue = Blue;
-}
 void Particle::isTouching(Particle& ParticleType, World& World_Map) { 
-
+>>>>>>> ccba95baf876d9dc7c99c6a69c22ce67e12a714e
 		for (const auto& temp : World_Map.Elements()) {
 			if (ParticleType.getRow() == temp.getRow() and ParticleType.getCol() == temp.getCol() and ParticleType.getType() == ParticleType::FIRE and temp.getType() == ParticleType::WATER) {
-			type = ParticleType::AIR;		
+				type = ParticleType::AIR;		
 			if (ParticleType.getRow() == temp.getRow() and ParticleType.getCol() == temp.getCol() and ParticleType.getType() == ParticleType::LIGHTNING and temp.getType() == ParticleType::WATER)
 				type = ParticleType::LIGHTNING;
 			if (ParticleType.getRow() == temp.getRow() and ParticleType.getCol() == temp.getCol() and ParticleType.getType() == ParticleType::LIGHTNING and temp.getType() == ParticleType::EARTH)
@@ -201,16 +204,19 @@ void Particle::isTouching(Particle& ParticleType, World& World_Map) {
 				
 		}
 	}
-	/*Particle* touching at(int r, int c);
-	//for (int i = 0; i < World_Map.size(); i++) 
-	if (touching != nullptr) {
-	if (touching->getType() == ParticleType::WATER)
-	touching->setType(ParticleType::AIR);
-	*/
-	} 
+} */
 
-
-void Particle::setVel( float xvel, float yvel){
-	x_vel = xvel;
-	y_vel = yvel;
+void Particle::isTouching(Particle& Particle, World& World_Map) {
+	if (this->type == ParticleType::WATER and Particle.getType() == ParticleType::FIRE) { 
+		Particle.setType(ParticleType::AIR);
+	}
+	if (this->type == ParticleType::LIGHTNING and Particle.getType() == ParticleType::WATER) {
+		Particle.setType(ParticleType::LIGHTNING);
+	}
+	if (this->type == ParticleType::LIGHTNING and Particle.getType() == ParticleType::EARTH) { 
+		Particle.setType(ParticleType::DIRT);
+	}
 }
+
+
+
