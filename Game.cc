@@ -212,6 +212,3 @@ void Game::commandBRIDGES(){
 	cout << "Bridges Output";
 		cout.flush();
 }
-
-
-
