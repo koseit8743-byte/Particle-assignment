@@ -15,7 +15,7 @@ public:
 private:
 	World world;
 	bool pause;
-	string SavePath;
+	string SaveFile;
 	int frame;
 	int fps;
 	int hudRows;

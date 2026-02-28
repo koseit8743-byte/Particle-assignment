@@ -35,7 +35,7 @@ Game::Game(){
 	pause=true;
 	frame = 0;
 	fps = 5;
-	SavePath = "world.txt";
+	SaveFile = "world.txt";
 	hudRows = 5;
 
 	paintType = ParticleType::DUST;
@@ -187,7 +187,7 @@ void Game::commandSAVE(){
 }
 void Game::commandLOAD(){
 	pause = true;
-	world.Load(SavePath);
+	world.Load(SaveFile);
 }
 void Game::commmandFPSup(){
 fps = min(60, fps + 1);
