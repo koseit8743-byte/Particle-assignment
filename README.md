@@ -27,6 +27,10 @@ Yousaf:
 -- touch() function to check if Particle is touching another
 -- .touch() function to see if the Particles are touching each other
 (Update README with new .touch() function)
+
+-- .touch() function to see if the Particles are touching each other
+-- touch() function to check if Particle is touching another
+ 62687f1 (Update README with touch() function details)
 -- ParticleType function to set and get particle types
 -- getters and setters in World.h for rows and columns
 -- World_Map of chars
