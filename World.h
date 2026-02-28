@@ -13,7 +13,7 @@ class World {
 	list<Particle> Parts;
 	list<Particle> World_Parts;
  	public: 
-//	World(int World_rows, int World_columns) : rows(World_rows), columns(World_columns) {};	
+World(int World_rows, int World_columns) : rows(World_rows), columns(World_columns) {};	
 	World();
 	  int getRows() const{
        return rows;

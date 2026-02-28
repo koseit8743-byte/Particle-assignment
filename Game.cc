@@ -31,7 +31,7 @@ void onMouseDown(int row, int col){
 	g_clickCol = col;
 }
 
-Game::Game():world(1,1){
+Game::Game() : world(1, 1) {
 	pause=true;
 	frame = 0;
 	fps = 5;
@@ -125,7 +125,7 @@ if (pause and g_clicked){
 		}
 	}
 }
-}
+
 if(!pause){
 	world.physics();
 	frame++;
@@ -133,16 +133,17 @@ if(!pause){
 	if(world.alive_count() == 0) {
 		pause = true;
 render();
+long long start = CurrMill();
 delayFrame(start);
 }
 }
-
+}
 void Game::render() {
 	clearscreen();
 	list<Particle> parts = world.Elements();
 	for(auto it = parts.begin(); it != parts.end(); ++it){
-		int r = (int)it->getRows();
-		int c = (int)it->getCols();
+		int r = (int)it->getRow();
+		int c = (int)it->getCol();
 
 		if(r < 0 or c < 0 or r>= world.getRows() or c >= world.getCols()) continue;
 		uint8_t rr = 255, gg = 255, bb = 255;
@@ -156,7 +157,7 @@ void Game::render() {
 	int hudTop = world.getRows() + 1;
 	movecursor((uint32_t)hudTop, 1);
 	resetcolor();
-	cout<<"Frame: " <<frame << " FPS: " << fps << (pause ? "Paused" : "Running") << Alive: << world.alive_count() << "Type:" << (int)paintType;
+	cout<<"Frame: " <<frame << " FPS: " << fps << (pause ? "Paused" : "Running") << "Alive:" << world.alive_count() << "Type:" << (int)paintType;
 
 	movecursor((uint32_t)(hudTop+1), 1);
 	cout << "Space Run/Pause   Q   L   S   D   +/-";
@@ -202,8 +203,9 @@ void Game::commandBRIDGES(){
 
 	int hudTop = world.getRows() + 1;
 	movecursor((uint32_t)(hudTop + 2), 1);
-	cout << "Bridges Output"
+	cout << "Bridges Output";
 		cout.flush();
+}
 
 
 
