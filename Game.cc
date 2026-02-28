@@ -45,11 +45,11 @@ if (ch == 'q' or ch == 'Q'){
 	pause = !pause;
 	}
 		else if (ch == 's' or ch == 'S'){
-		world.save(SaveFile);
+		world.Save();
 		}
 			else if (ch == 'l' or ch == 'L'){
 			pause = 1;
-			world.load(SaveFile);
+			world.Load(SaveFile);
 			}
 				else if (ch == '+') {
 				fps++;	
@@ -59,4 +59,4 @@ if (ch == 'q' or ch == 'Q'){
 					}	
 		}
 	}
-}
+
