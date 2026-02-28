@@ -25,6 +25,8 @@ Yousaf:
 -- Lifetime variable that decrements over time 
 -- setStill function to check if particle is moving
 -- touch() function to check if Particle is touching another
+-- .touch() function to see if the Particles are touching each other
+(Update README with new .touch() function)
 -- ParticleType function to set and get particle types
 -- getters and setters in World.h for rows and columns
 -- World_Map of chars
@@ -127,3 +129,14 @@ Yousaf:
 16.it should delay long enough to guarantee a fixed frame rate of 5 fps - 
 17.Use clock (or std::chrono) to see how long it has been since the last frame began -
 18.Use usleep() to delay execution so you get a guaranteed frame rate 
+
+Diego:
+--It has the world (.world World) as a member variable
+ ----The world should be initialized with the screen_size as the row and col, but leave some lines open on the bottom of the screen to show the frame count and a helpful list of commands
+  --It has to handle all input from mouse and keyboard using non-blocking I/O
+--Implement a command to start simulating the world
+--Implement a command to pause simulating the world
+--Implement a command to quit
+ --Implement a command to load the world from disk
+ --Implement a command to save the world to disk 
+and ----Use clock (or std::chrono) to see how long it has been since the last frame began
