@@ -24,12 +24,13 @@ Yousaf:
 --List of all particles in the world
 -- Lifetime variable that decrements over time 
 -- setStill function to check if particle is moving
+-- touch() function to check if Particle is touching another
 -- ParticleType function to set and get particle types
 -- getters and setters in World.h for rows and columns
 -- World_Map of chars
 -- size() method to return how many particles are in the world
 -- alive_count() method to see which particles lifetimes > 0
---Boundary method to see if the rows and Columns are set to teh terminal_size()
+--Boundary method to see if the rows and Columns are set to the terminal_size()
 --Wrote Makefile
 
 
