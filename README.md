@@ -30,7 +30,7 @@ Yousaf:
 -- World_Map of chars
 -- size() method to return how many particles are in the world
 -- alive_count() method to see which particles lifetimes > 0
---Boundary method to see if the rows and Columns are set to teh terminal_size()
+--Boundary method to see if the rows and Columns are set to the terminal_size()
 --Wrote Makefile
 
 
