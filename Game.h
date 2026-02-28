@@ -21,7 +21,7 @@ public:
 	void initialize() override;
 //Keeps game looping per <NonBlockingGame.h> & performs checks
 	void GameLoop() override;
-
+//Sanity
 private:
 void FPSdelay(int frame_start);
 void render();
