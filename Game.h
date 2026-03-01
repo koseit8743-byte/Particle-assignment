@@ -2,48 +2,38 @@
 
 //World for "World world;" Why? idk
 #include "World.h"
-//In BRIDGES library for NonBlocking I/O
-#include <NonBlockingGame.h>
-//Bridges Color Names
-#include "NamedColor.h"
-//Not sure yet but will need *shrug* 
-//I think "NamedSymbol.h" is included in <NonBlockingGame.h>
-#include "NamedSymbol.h"
-
+#include "Particle.h"
 #include <string>
+#include "/public/colors.h"
+//Previous Header included "NonBlockingGame" from bridges. Upadated to use colors.h
 
-class Game : public bridges::game::NonBlockingGame {
+class Game {
 public:
 	Game();
-//Runs game
 	void run();
-//Does doohickeys on launch
-	void initialize() override;
-//Keeps game looping per <NonBlockingGame.h> & performs checks
-	void GameLoop() override;
 
 private:
-void FPSdelay(int frame_start);
-void render();
-void Physics();
-void InputControls();
+	World world;
+	bool pause;
+	string SavePath;
+	int frame;
+	int fps;
+	int hudRows;
+	ParticleType paintType;
 
-static const int Board_Rows = 32;
-static const int Board_Columns = 32;
-static const int Hud_Space = 3;
-static const int Hud_Rows = 3;
+	void Input();
+	void PhysicsUpdate();
+	void render();
+	void delayFrame(long long StartFrame);
 
-int Mouse_X = 0;
-int Mouse_Y = 0;
+	void commandSAVE();
+	void commandLOAD();
+	void commandPAUSE();
+	void commmandFPSup();
+	void commandFPSdown();
+	void commandBRIDGES();
 
- bool Pause;
-string SaveFile = "Game.txt";
-int frames = 0;
-int fps = 5;
-
-
-
-World world;
+	long long CurrMill() const;
 
 
 };
