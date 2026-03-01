@@ -1,159 +1,37 @@
+# Particle-assignment
+Class group, the giggles , particle assignment
 
+Kwabe: 
+Position (.row, .col float)
+Velocity (.x_vel and .y_vel float)
+.type enum (air, dust, fire, water, earth, dirt, lightning)
+Color (.r .g .b uint8_t) that should be set initially by its type
+.stationary boolean
+.lifetime variable
+Member variables in private section
+Methods in public section
+Constructor with parameters
+Getters for all member variables (getRow, getCol, getXvel, getYvel, getType, isStill, getLifetime, getColor)
+Setters for all member variables (setRow, setStill, setVel, setLifetime, setColor)
+Rule of 0 followed
+ Created Colors.h with Color struct
+Created Colors.cc with ParticleColor() function
+Integrated colors into Particle constructor
+Set default colors for each particle type (AIR=white, DUST=tan, FIRE=orange, WATER=blue, EARTH=brown, DIRT=dark brown, LIGHTNING=yellow)
 
-Mythic_Bozo
-
- — 6:50 PM
-Diego is this supposed to be colors.h ? I can't run main.cc because this thing is getting flagged. Also, I need to know what function to call right here
-Image
-Image
-ᯓ diego ᯓ — 6:50 PM
-no that was an old header i’m not using anymore
-Mythic_Bozo
-
- — 6:50 PM
-oh ok
-ᯓ diego ᯓ — 6:50 PM
-i think i’m having git trouble rn
-Mythic_Bozo
-
- — 6:50 PM
-oh shoot
-ᯓ diego ᯓ — 6:51 PM
-my game.h is showing an old instance
-Mythic_Bozo
-
- — 6:51 PM
-uhhh
-search up the code to fix it, uh its kinda complex
-ᯓ diego ᯓ — 6:52 PM
-okay i hope this fixes if not i can just rewrite game.h real quick 🫩
-Mythic_Bozo
-
- — 7:00 PM
-Image
-Try this
-ᯓ diego ᯓ — 7:11 PM
-working on it
-ᯓ diego ᯓ — 8:04 PM
-phew all fixed
-yeah i had hella conflicts
-Mythic_Bozo
-
- — 8:32 PM
-alr
-ill pull
-ᯓ diego ᯓ — 8:33 PM
-still working on game.cc should be good in 30 mins
-Mythic_Bozo
-
- — 8:34 PM
-k
-after then lets hop into a vc so we can finish up and test stuff 
-ill need all your changes Diego
-Mythic_Bozo
-
- — 9:09 PM
-lmk when your done Diego
-ᯓ diego ᯓ — 9:17 PM
-i’m almost done
-Mythic_Bozo
-
- — 9:17 PM
-oki dokie
-@omwxbe do you wanna test it  then :?
-omwxbe — 9:22 PM
-yea try running it
-if theres no erors run it
-Mythic_Bozo
-
- — 9:22 PM
-I need to pull Diego's code first cause I need to know how to call Game 
-omwxbe — 9:22 PM
-i ard turned it on canvas, diego if theres any other bullet points that you did you need to put it on read me
-or just re submit it on canvas just add ur changes
-Mythic_Bozo
-
- — 9:24 PM
-we forgot to include the touch function in our Readme file
-or idk
-omwxbe — 9:25 PM
-just add it
-Mythic_Bozo
-
- — 9:25 PM
-aight
-you edited this right Kwabe :?
-Image
-yeah I won't be able to make until all the changes are finished
-Mythic_Bozo
-
- — 9:35 PM
-k imma shower lmk when its done
-ᯓ diego ᯓ — 9:42 PM
-okay i’m wrapped up im pushing rn
-Mythic_Bozo
-
- — 10:04 PM
-alr
-we have oen error left
-ᯓ diego ᯓ — 10:11 PM
-in game?
-Mythic_Bozo
-
- — 10:11 PM
-ye I think I need a constructor rq for rows and columns :?
-Image
-ᯓ diego ᯓ — 10:14 PM
-that’s my old instance did you pull?
-Mythic_Bozo
-
- — 10:14 PM
-yah I pulled rn.
-lemme check the github
-ill just swap it rq
-ᯓ diego ᯓ — 10:14 PM
-okay i hope i pushed right
-fixing the conflicts sucked
-Mythic_Bozo
-
- — 10:15 PM
-your good, wait do we need this to be calling World :? I think yeah
-Image
-ᯓ diego ᯓ — 10:16 PM
-yeah i think it would 
-but i got rid of it
-Mythic_Bozo
-
- — 10:16 PM
-dam Idk whether to put it in my default constructor
-wait Diego hop into call rq if you can
-ᯓ diego ᯓ — 10:18 PM
-hol up my computer just died
-Mythic_Bozo
-
- — 10:18 PM
-ooof
-omwxbe — 10:21 PM
-yeah i added more to the Read me
-Mythic_Bozo
-
- — 10:21 PM
-ok
-imma test it out rn if you guys wanna join the vc
-omwxbe — 10:21 PM
-oh shoot i didnt push it
-Mythic_Bozo
-
- — 10:25 PM
-Diego is having toruble pushing
-omwxbe — 10:36 PM
-pushing what , i see all his changes
-Mythic_Bozo
-
- — 10:39 PM
-really? I have a divergent branch rn
-wait liek you see everything in game
-omwxbe — 10:41 PM
+Yousaf:
+-- created a size of rows and cols of the boundary of the world
+--List of all particles in the world
+-- Lifetime variable that decrements over time 
+-- setStill function to check if particle is moving
+-- touch() function to check if Particle is touching another
+-- ParticleType function to set and get particle types
+-- getters and setters in World.h for rows and columns
+-- World_Map of chars
+-- size() method to return how many particles are in the world
+-- alive_count() method to see which particles lifetimes > 0
+--Boundary method to see if the rows and Columns are set to the terminal_size()
+--Wrote Makefile
 # Particle Simulation Project
 
 ## Collaborators
