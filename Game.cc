@@ -55,14 +55,6 @@ set_mouse_mode(true);
 set_cursor_mode(false);
 on_mousedown(onMouseDown);
 
-Game::Game() : bridges::game::NonBlockingGame(Assignment, Username, API, Board_Rows, Board_Columns),
- world(Board_Rows - Hud_Rows, Board_Columns)
-	}
-//Starts game 
-virtual void initialize() override {
-setTitle("Particle Sim");
-setDescription( "// Space = Pause or Run // Q = Quit // W = Load // S = Save // <- Increase Frame Rate // -> Decrease Frame Rate");
-=======
 auto terminal = get_terminal_size();
 int termRows = terminal.first;
 int termCols = terminal.second;
