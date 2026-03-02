@@ -134,7 +134,7 @@ if (ch == 'q' or ch == 'Q'){
 						}
 //test print
 else if(ch =='p' or ch =='P'){
-	Particle test(5, 5, paintType);
+	Particle test(rand() % termRows, rand() % termCols, paintType);
 	test.setLifetime(200);
 	world.addParticle(test);
 
@@ -157,7 +157,7 @@ if (pause and g_clicked){
 	if (r>= 0 and r < world.getRows() and c >= 0 and c < world.getCols()) {
 		Particle* existing = world.at((float)r, (float)c);
 
-		if(existing != nullptr){
+		if(existing == nullptr){
 			existing -> setLifetime(0);
 		}
 		else{
@@ -196,11 +196,12 @@ void Game::render() {
 		int c = (int)it->getCol();
 
 		if(r < 0 or c < 0 or r>= world.getRows() or c >= world.getCols()) continue;
-		uint8_t rr = 255, gg = 255, bb = 255;
+		uint8_t rr = rand() % 255, gg = rand() % 255, bb = rand() % 255;
 		it->getColor(rr,gg,bb);
 		movecursor((uint32_t)(r + 1), (uint32_t)(c+1));
 		setbgcolor(rr,gg,bb);
 		cout << " ";
+		cout.flush();
 		resetcolor();
 	}
 

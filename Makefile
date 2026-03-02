@@ -8,14 +8,15 @@ main.o: main.cc Particle.h World.h Game.h Colors_Local.h
 Particle.o: Particle.cc Particle.h World.h
 	g++ -c Particle.cc
 
-Game.o: Game.cc Game.h Particle.h World.h Bridges.h
+Game.o: Game.cc Game.h Particle.h World.h
 	g++ -c Game.cc
 
 World.o: World.cc World.h Particle.h
 	g++ -c World.cc
 
-NewBridges.o: NewBridges.cc NewBridges.h
+NewBridges.o: Particle.h World.h NewBridges.cc NewBridges.h
 	g++ -c NewBridges.cc
+
 Colors_Local.o: Colors_Local.cc Colors_Local.h
 	g++ -c Colors_Local.cc
 
