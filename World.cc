@@ -5,6 +5,30 @@
 #include <fstream>
 using namespace std;
 
+World::World() {
+	const auto [ROWS,COLS] = get_terminal_size();
+	rows = ROWS;
+	columns = COLS;
+	
+
+}
+
+int World::getRows() const { 
+	return rows;
+}
+
+int World::getCols() const { 
+	return columns;
+}
+
+void World::SetRows(int World_rows) { 
+	rows = World_rows;
+}
+
+void World::SetColumns(int World_cols) { 
+	columns = World_cols;
+}
+
 World::World(int World_rows, int World_cols) {
 	Boundaries();
 	rows = World_rows;
@@ -77,15 +101,15 @@ char World::get_Map_Location(vector<vector<char>> &World_Map, size_t World_rows,
 		return World_Map[World_rows][World_columns];
 }
 
-void World::Game_Map() {
+/*void World::Game_Map() {
 	clearscreen();	
 	for (size_t i = 0; i < World_Map.size(); i++) { 
 		for (size_t j = 0; j < World_Map[i].size(); j++) {
-		World_Map[i][j] = ' '; //This will print out spaces in the terminal so we can visually see the particle
+		World_Map[i][j] = '*'; //This will print out spaces in the terminal so we can visually see the particle
 	}
 	cout << endl;
 	}
-}
+}*/
 
 
 

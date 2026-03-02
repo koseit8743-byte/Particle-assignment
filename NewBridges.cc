@@ -8,7 +8,7 @@ using namespace std;
 using namespace bridges::datastructure;
 VisualBridges::VisualBridges(int assign, string username, string APIkey) {
 	bridges =  new bridges::Bridges(assign, username, APIkey);
-bridges->setTitle("Particle Simlation");
+	bridges->setTitle("Particle Simlation");
 	bridges->setDescription("Particle Class");
 
 }
