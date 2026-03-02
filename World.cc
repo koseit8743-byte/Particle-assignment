@@ -1,4 +1,3 @@
-#include "/public/read.h" // IWYU pragma: keep
 #include <vector> // IWYU pragma: keep
 #include "World.h"
 #include "Particle.h"
@@ -39,7 +38,7 @@ int World::size() const {
 
 int World::alive_count() {
 	int alive = 0;
-	auto temp = Parts.begin();
+	/*auto temp = Parts.begin();
 	while (temp != Parts.end()) { //double check if this should be a different loop
 	 if (temp->getLifetime() == 0) {
 		temp = Parts.erase(temp);
@@ -48,18 +47,23 @@ else if (temp->getLifetime() > 0) {
 	alive++;
 	temp++;
 	}
- }
+ }*/
+	for(const auto& p : Parts){
+		if(p.getLifetime() != 0) alive ++;
+	}
 	return alive;
 }
 
-void World::isInside() {
+/* void World::isInside() {
 	auto temp = Parts.begin();
 	while (temp != Parts.end()) {
 		if (temp->getRow() < 0 or temp->getCol() < 0 or temp->getRow() >= rows or temp->getCol() >= columns) { 
 			temp = Parts.erase(temp);
-		}
+		} else {
+			++temp;
 	}
-}
+	}
+}*/
 
 bool World::isEmpty(int r, int col) {
   if(r < 0 ||  r >= rows || col < 0 || col  >= columns) return false;
@@ -104,6 +108,24 @@ void World::Save() {
 void World::add(Particle holder) { 
 		Parts.emplace_back(holder);
 }
+
+void World::physics(){
+	for (auto it = Parts.begin(); it != Parts.end(); ){
+		it->Physics(*this);
+
+		bool dead = (it->getLifetime() == 0);
+		bool out = (it->getRow() < 0 or it->getCol() < 0 or it->getRow() >= rows or it->getCol() >= columns);
+	
+		if (dead or out){
+			it = Parts.erase(it);
+		}else{
+			++it;
+
+	}
+	//alive_count();
+	//isInside();
+	}
+	}
 /*void World::Save(string SaveFile) { 
 		ofstream upload(SaveFile);
 		if (upload.eof())

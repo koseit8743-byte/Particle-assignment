@@ -5,7 +5,6 @@
 
 #include "Particle.h"
 #include <string>
-#include "/public/colors.h"
 using namespace std;
 //Previous Header included "NonBlockingGame" from bridges. Upadated to use colors.h
 

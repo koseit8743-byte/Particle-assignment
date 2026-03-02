@@ -1,8 +1,8 @@
 #target: dependencies
-a.out: main.o Particle.o World.o Game.o colors.o  NewBridges.o
-	g++ main.o Particle.o World.o Game.o colors.o  NewBridges.o -lbridges -lcurl
+a.out: main.o Particle.o World.o Game.o Colors_Local.o  NewBridges.o
+	g++ main.o Particle.o World.o Game.o Colors_Local.o  NewBridges.o -lbridges -lcurl
 
-main.o: main.cc Particle.h World.h Game.h Colors.h
+main.o: main.cc Particle.h World.h Game.h Colors_Local.h
 	g++ -c main.cc
 
 Particle.o: Particle.cc Particle.h World.h
@@ -16,9 +16,9 @@ World.o: World.cc World.h Particle.h
 
 NewBridges.o: NewBridges.cc NewBridges.h
 	g++ -c NewBridges.cc
-colors.o: colors.cc Colors.h
-	g++ -c colors.cc
+Colors_Local.o: Colors_Local.cc Colors_Local.h
+	g++ -c Colors_Local.cc
 
 
 clean:
-	rm -rf a.out main.o Particle.o World.o colors.o Game.o NewBridges.o
+	rm -rf a.out main.o Particle.o World.o Colors_Local.o Game.o NewBridges.o

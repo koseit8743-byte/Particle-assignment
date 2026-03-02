@@ -1,6 +1,7 @@
 #include "Particle.h"
 #include "World.h"
-#include "Colors.h"
+#include "Colors_Local.h"
+#include "/public/colors.h"
 #include <condition_variable>
 #include <cstdint>
 #include <numeric>

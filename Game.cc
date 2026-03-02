@@ -1,35 +1,42 @@
-#include "/public/read.h" // IWYU pragma: keep
 #include "Game.h"
 #include <chrono>
+#include "/public/colors.h"
 #include <csignal>
 #include <cstdlib>
 #include <cstdint>
 //Non Blocking I/O, #include <NonBlockingGame.h> (Formerly Used)
-#include "/public/colors.h"
 #include "Particle.h"
 //usleep
 #include <ostream>
 #include <unistd.h>
 #include <algorithm>
-
 //prevents sadness and upset when exiting
 void cleanupTerminal() {
 	set_mouse_mode(false);
 	set_raw_mode(false);
 	set_cursor_mode(true);
 	resetcolor();
+
+//	std::cout << "\033[?1000l\033[?10006l" << std::flush;
 	}
+
 static void CtrlC(int) {
 	exit(0);
 }
 
 bool g_clicked = false;
-int g_clickRow = 0;
-int g_clickCol = 0;
+int g_clickRow = -1;
+int g_clickCol = -1;
+
 void onMouseDown(int row, int col){
 	g_clicked = true;
 	g_clickRow = row;
 	g_clickCol = col;
+
+//	movecursor(1,1);
+//	resetcolor();
+//cout << "Click row=" << row << "Col" << col << "" << flush;
+
 }
 
 Game::Game() : world(1, 1) {
@@ -52,8 +59,9 @@ void Game::run() {
 	signal(SIGINT, CtrlC);
 	
 set_raw_mode(true);
-set_mouse_mode(true);
 set_cursor_mode(false);
+set_mouse_mode(true);
+//std::cout << "\033[?1006l\033[?1000h" << std::flush;
 on_mousedown(onMouseDown);
 
 auto terminal = get_terminal_size();
@@ -66,7 +74,11 @@ int worldCols = max(1, termCols);
 world.SetRows(worldRows);
 world.SetColumns(worldCols);
 
-clearscreen();
+//Testing
+//Particle test(5, 5, paintType);
+//world.addParticle(test);
+
+//clearscreen();
 movecursor(1,1);
 cout << "Particle Sim" << endl;
 cout << "Space = Run/Pause | Q = Quit | L = Load | S = Save | D = BRIDGES | +/- FPS" << endl;
@@ -76,17 +88,26 @@ cout.flush();
 
 	//Input Reading
 while (true){
-int ch = quick_read();
-if (ch == ' ') break;
-usleep(10'000);
+int ch;
+while ((ch = quick_read()) != ERR){
+if (ch == ' ') goto START;
 }
-pause = false;
-
-for (int i = 0; i < 10; i++) quick_read();
+usleep(10000);
+}
+START:
+;
 bool currently_running = true;
 while(currently_running) {
-	long long start = CurrMill();
-int ch = quick_read();
+	long long frameStart = CurrMill();
+int ch;
+while((ch = quick_read()) != ERR){
+
+/*Debugging
+if(ch != -1){
+	cout << "ch="<<ch<< "\n";
+	cout.flush();
+}
+*/
 if (ch == 'q' or ch == 'Q'){
 	currently_running = 0;
 }
@@ -94,11 +115,6 @@ if (ch == 'q' or ch == 'Q'){
 	commandPAUSE();
 	}
 		else if (ch == 's' or ch == 'S'){
-		world.Save();
-		}
-			else if (ch == 'l' or ch == 'L'){
-			pause = 1;
-			world.Load(SaveFile);
 		commandSAVE();
 		}
 			else if (ch == 'l' or ch == 'L'){
@@ -113,41 +129,63 @@ if (ch == 'q' or ch == 'Q'){
 						else if(ch == 'd' or ch == 'D'){
 							commandBRIDGES();
 						}
-	}
+//test print
+else if(ch =='p' or ch =='P'){
+	Particle test(5, 5, paintType);
+	test.setLifetime(200);
+	world.addParticle(test);
 
+}
+if (ch=='2') paintType = ParticleType::DIRT;
+if (ch=='4') paintType = ParticleType::WATER;
+if (ch=='6') paintType = ParticleType::FIRE;
+if (ch=='1') paintType = ParticleType::LIGHTNING;
+if (ch=='0') paintType = ParticleType::AIR;
+}
 if (pause and g_clicked){
 	g_clicked = false;
 
 	int r = g_clickRow;
 	int c = g_clickCol;
 
-	if (r > 0) r -= 1; if (c > 0) c -=1;
+	if (r > 0) r -= 1; 
+	if (c > 0) c -=1;
 
 	if (r>= 0 and r < world.getRows() and c >= 0 and c < world.getCols()) {
 		Particle* existing = world.at((float)r, (float)c);
 
 		if(existing != nullptr){
 			existing -> setLifetime(0);
-		}else{
+		}
+		else{
 			Particle p((float)r, (float)c, paintType);
+			p.setLifetime(200);
 			world.addParticle(p);
 		}
 	}
-}
 
+}
 if(!pause){
+
 	world.physics();
 	frame++;
-
-	if(world.alive_count() == 0) {
-		pause = true;
+//	if(before > 0 and after == 0) {
+//		pause = true;
+	}
 render();
-long long start = CurrMill();
-delayFrame(start);
+delayFrame(frameStart);
 }
 }
-}
+
 void Game::render() {
+
+//Testing
+//movecursor(5, 5);
+//setbgcolor(255, 0, 0);
+//cout << " ";
+//resetcolor();
+//cout.flush();
+
 	clearscreen();
 	list<Particle> parts = world.Elements();
 	for(auto it = parts.begin(); it != parts.end(); ++it){
@@ -166,14 +204,20 @@ void Game::render() {
 	int hudTop = world.getRows() + 1;
 	movecursor((uint32_t)hudTop, 1);
 	resetcolor();
-	cout<<"Frame: " <<frame << " FPS: " << fps << (pause ? "Paused" : "Running") << "Alive:" << world.alive_count() << "Type:" << (int)paintType;
+	cout<<"Frame: " <<frame << "| FPS: " << fps << (pause ? " | Paused " : " | Running ") << "| Alive: " << world.alive_count() << " | Type: " << (int)paintType;
 
 	movecursor((uint32_t)(hudTop+1), 1);
-	cout << "Space Run/Pause   Q   L   S   D   +/-";
+	cout << " Space:Run/Pause | Q | L | S | D | +/-";
 
 	movecursor((uint32_t)(hudTop +2), 1);
 	cout << "Paused";
 	cout.flush();
+
+	movecursor((uint32_t)(hudTop + 3),1);
+	resetcolor();
+	cout << "click: " << g_clicked << "," << g_clickCol << "clicked=" << g_clickRow << "    ";
+
+cout.flush();
 }
 
 void Game::delayFrame(long long StartFrame) {
@@ -184,14 +228,14 @@ void Game::delayFrame(long long StartFrame) {
 		long long remainder = GoalMS - elapsed;
 		usleep((useconds_t)(remainder * 1000));
 	}
+
+
 }
-
-
 void Game::commandPAUSE(){
 	pause = !pause;
 }
 void Game::commandSAVE(){
-	world.Save();
+	world.Save(); 
 }
 void Game::commandLOAD(){
 	pause = true;
