@@ -144,7 +144,7 @@ if (ch=='4') paintType = ParticleType::WATER;
 if (ch=='6') paintType = ParticleType::FIRE;
 if (ch=='1') paintType = ParticleType::LIGHTNING;
 if (ch=='0') paintType = ParticleType::AIR;
-}
+//}
 if (pause and g_clicked){
 	g_clicked = false;
 
@@ -168,6 +168,7 @@ if (pause and g_clicked){
 	}
 
 }
+} //temp holder
 if(!pause){
 
 	world.physics();
