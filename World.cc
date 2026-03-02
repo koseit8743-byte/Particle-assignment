@@ -73,7 +73,7 @@ else if (temp->getLifetime() > 0) {
 	}
  }*/
 	for(const auto& p : Parts){
-		if(p.getLifetime() != 0) alive ++;
+		if(p.getLifetime() != 0) alive++;
 	}
 	return alive;
 }

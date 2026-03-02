@@ -150,6 +150,7 @@ if (ch=='4') paintType = ParticleType::WATER;
 if (ch=='6') paintType = ParticleType::FIRE;
 if (ch=='1') paintType = ParticleType::LIGHTNING;
 if (ch=='0') paintType = ParticleType::AIR;
+if (ch == '9') paintType = ParticleType::EARTH;
 //}
 //movecursor(30,30);
 //cout << "YUP\n";
@@ -230,7 +231,7 @@ void Game::render() {
 
 	movecursor((uint32_t)(hudTop + 3),1);
 	resetcolor();
-	cout << "click: " << g_clicked << "," << g_clickCol << "clicked=" << g_clickRow << "    ";
+	//cout << "click: " << g_clicked << "," << g_clickCol << "clicked=" << g_clickRow << "    ";
 
 cout.flush();
 }
