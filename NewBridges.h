@@ -1,5 +1,5 @@
-  #ifndef BRIDGES_H
-  #define BRIDGES_H
+  #ifndef NEWBRIDGES_H
+  #define NEWBRIDGES_H
  #include <Bridges.h>
 #include<DataStructure.h>
 #include <string>  

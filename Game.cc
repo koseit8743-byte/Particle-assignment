@@ -8,6 +8,7 @@
 #include "/public/colors.h"
 #include "Particle.h"
 //usleep
+#include <ostream>
 #include <unistd.h>
 #include <algorithm>
 
@@ -31,7 +32,7 @@ void onMouseDown(int row, int col){
 	g_clickCol = col;
 }
 
-Game::Game(){
+Game::Game() : world(1, 1) {
 	pause=true;
 	frame = 0;
 	fps = 5;
@@ -79,7 +80,9 @@ int ch = quick_read();
 if (ch == ' ') break;
 usleep(10'000);
 }
+pause = false;
 
+for (int i = 0; i < 10; i++) quick_read();
 bool currently_running = true;
 while(currently_running) {
 	long long start = CurrMill();
