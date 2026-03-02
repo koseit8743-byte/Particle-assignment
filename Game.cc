@@ -167,7 +167,7 @@ if (g_clicked){
 	if (r>= 0 and r < world.getRows() and c >= 0 and c < world.getCols()) {
 		Particle* existing = world.at(r, c);
 
-		if(existing == nullptr){
+		if(existing != nullptr){
 			existing -> setLifetime(0);
 		}
 		else{
