@@ -13,9 +13,21 @@ Particle::Particle(float row1, float col1, ParticleType Type){
 	col = col1;
 	type = Type;
 	still = false;
+	 lifetime = -1;
+
+ if(type == ParticleType::AIR){
+   x_vel = 1.0f;
+   y_vel = -1.0f;
+   }
+ else {
 	x_vel = 0.0f;
 	y_vel = 0.0f;
-	lifetime = -1;
+ }
+ if(type == ParticleType::LIGHTNING){
+	 x_vel = 1.0f;
+	 y_vel = 0.0f;
+	 lifetime = 10;
+ }
 
 	Color color = ParticleColor(type);
 
