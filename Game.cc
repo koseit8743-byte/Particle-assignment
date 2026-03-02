@@ -1,5 +1,6 @@
 #include "/public/read.h" // IWYU pragma: keep
 #include "Game.h"
+#include "World.h"
 #include <chrono>
 #include <csignal>
 #include <cstdlib>
@@ -10,6 +11,8 @@
 //usleep
 #include <unistd.h>
 #include <algorithm>
+
+//class World;
 
 //prevents sadness and upset when exiting
 void cleanupTerminal() {

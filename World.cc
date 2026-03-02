@@ -6,6 +6,29 @@
 #include <fstream>
 using namespace std;
 
+World::World() {
+	rows = 0;
+	columns = 0;
+	
+
+}
+
+int World::getRows() const { 
+	return rows;
+}
+
+int World::getCols() const { 
+	return columns;
+}
+
+void World::SetRows(int World_rows) { 
+	rows = World_rows;
+}
+
+void World::SetColumns(int World_cols) { 
+	columns = World_cols;
+}
+
 World::World(int World_rows, int World_cols) {
 	Boundaries();
 	rows = World_rows;

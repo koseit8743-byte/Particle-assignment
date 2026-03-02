@@ -8,7 +8,7 @@ main.o: main.cc Particle.h World.h Game.h Colors.h
 Particle.o: Particle.cc Particle.h World.h
 	g++ -c Particle.cc
 
-Game.o: Game.cc Game.h Particle.h
+Game.o: Game.cc Game.h Particle.h World.h
 	g++ -c Game.cc
 
 World.o: World.cc World.h Particle.h
