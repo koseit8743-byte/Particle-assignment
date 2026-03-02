@@ -15,19 +15,10 @@ class World {
  	public: 
 //World(int World_rows, int World_columns) : rows(World_rows), columns(World_columns) {};	
 	World();
-	  int getRows() const{
-       return rows;
-     }
-     int getCols() const{
-   return columns;
-     }
-
-	void SetRows(int World_rows) {
-		rows = World_rows;
-	}
-	void SetColumns(int World_columns) { 
-		columns = World_columns;
-	}
+	int getRows() const;
+    int getCols() const;
+	void SetRows(int World_rows); 
+	void SetColumns(int World_columns);
 
 	//char get_Map_Location(vector<vector<char>> &World_Map);
 	World(int World_rows, int World_cols);	

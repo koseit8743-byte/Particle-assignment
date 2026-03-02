@@ -1,4 +1,4 @@
-#include "Bridges.h"
+/*#include "Bridges.h"
 #include "World.h"
 #include<iostream>
 #include "Particle.h"
@@ -34,4 +34,4 @@ ColorGrid cg(rows, cols);
 
 		 bridges->setDataStructure(&cg);
 	bridges->visualize();
-}
+}*/
