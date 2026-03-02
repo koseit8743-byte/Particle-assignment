@@ -7,5 +7,6 @@ using namespace std;
 int main() {
 	Game Start;
 	Start.run();
+
 	return 0; 
 }

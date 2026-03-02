@@ -65,7 +65,7 @@ set_raw_mode(true);
 set_cursor_mode(false);
 set_mouse_mode(true);
 //std::cout << "\033[?1006l\033[?1000h" << std::flush;
-on_mousedown(onMouseDown);
+//on_mousedown(onMouseDown);
 
 auto terminal = get_terminal_size();
 int termRows = terminal.first;
@@ -98,12 +98,15 @@ if (ch == ' ') goto START;
 usleep(10000);
 }
 START:
-;
+set_raw_mode(true);
+set_mouse_mode(true);
+on_mousedown(onMouseDown);
 bool currently_running = true;
 while(currently_running) {
 	long long frameStart = CurrMill();
 int ch;
-while((ch = quick_read()) != ERR){
+//while((ch = quick_read()) != ERR){
+ch = quick_read();
 
 /*Debugging
 if(ch != -1){
@@ -145,7 +148,11 @@ if (ch=='6') paintType = ParticleType::FIRE;
 if (ch=='1') paintType = ParticleType::LIGHTNING;
 if (ch=='0') paintType = ParticleType::AIR;
 //}
-if (pause and g_clicked){
+//movecursor(30,30);
+//cout << "YUP\n";
+//usleep(100000);
+//on_mousedown(onMouseDown);
+if (g_clicked){
 	g_clicked = false;
 
 	int r = g_clickRow;
@@ -155,20 +162,20 @@ if (pause and g_clicked){
 	if (c > 0) c -=1;
 
 	if (r>= 0 and r < world.getRows() and c >= 0 and c < world.getCols()) {
-		Particle* existing = world.at((float)r, (float)c);
+		Particle* existing = world.at(r, c);
 
 		if(existing == nullptr){
 			existing -> setLifetime(0);
 		}
 		else{
-			Particle p((float)r, (float)c, paintType);
+			Particle p(r, c, paintType);
 			p.setLifetime(200);
 			world.addParticle(p);
 		}
 	}
 
 }
-} //temp holder
+ //temp holder
 if(!pause){
 
 	world.physics();
