@@ -7,8 +7,9 @@
 using namespace std;
 
 World::World() {
-	rows = 0;
-	columns = 0;
+	const auto [ROWS,COLS] = get_terminal_size();
+	rows = ROWS;
+	columns = COLS;
 	
 
 }
