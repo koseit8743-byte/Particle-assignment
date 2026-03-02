@@ -127,6 +127,9 @@ void Particle::Physics(World& World_Map) {
 			col = col + 1;
 			}
 			
+	else if (World_Map.at(row - 1, col - 1)) {
+			setStill(true);
+		}
 	}
 	
 	else if (type == ParticleType::DUST){
@@ -162,6 +165,7 @@ void Particle::Physics(World& World_Map) {
 
    else	if (type == ParticleType::EARTH) {
 	   setStill(true);
+	   lifetime = -1;
 	}
 	else if ( type == ParticleType::LIGHTNING){
 	if (lifetime <= 0 ) return;
@@ -201,17 +205,13 @@ void Particle::Physics(World& World_Map) {
 	}
 }
 
-/*void Particle::isTouching(Particle& ParticleType, World& World_Map) { 
-=======
-}
 
-void Particle::isTouching(Particle& ParticleType, World& World_Map) { 
->>>>>>> ccba95baf876d9dc7c99c6a69c22ce67e12a714e
+/*void Particle::isTouching(Particle& ParticleType, World& World_Map) { 
 		for (const auto& temp : World_Map.Elements()) {
 			if (ParticleType.getRow() == temp.getRow() and ParticleType.getCol() == temp.getCol() and ParticleType.getType() == ParticleType::FIRE and temp.getType() == ParticleType::WATER) {
 				type = ParticleType::AIR;		
 			if (ParticleType.getRow() == temp.getRow() and ParticleType.getCol() == temp.getCol() and ParticleType.getType() == ParticleType::LIGHTNING and temp.getType() == ParticleType::WATER)
-				type = ParticleType::LIGHTNING;
+				this->setType(ParticleType::LIGHTNING);
 			if (ParticleType.getRow() == temp.getRow() and ParticleType.getCol() == temp.getCol() and ParticleType.getType() == ParticleType::LIGHTNING and temp.getType() == ParticleType::EARTH)
 				type = ParticleType::DIRT;
 				
@@ -225,10 +225,12 @@ void Particle::isTouching(Particle& Particle, World& World_Map) {
 		this->setType(ParticleType::AIR);
 		Particle.setType(ParticleType::AIR);
 	}
-	if (this->type == ParticleType::LIGHTNING and Particle.getType() == ParticleType::WATER) {
+	if (this->type == ParticleType::WATER and Particle.getType() == ParticleType::LIGHTNING) {
+		this->setType(ParticleType::LIGHTNING);
 		Particle.setType(ParticleType::LIGHTNING);
 	}
 	if (this->type == ParticleType::LIGHTNING and Particle.getType() == ParticleType::EARTH) { 
+		this->setType(ParticleType::DIRT);
 		Particle.setType(ParticleType::DIRT);
 		}
 	}
