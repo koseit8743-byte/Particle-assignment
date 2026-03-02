@@ -76,7 +76,10 @@ int worldCols = max(1, termCols);
 
 world.SetRows(worldRows);
 world.SetColumns(worldCols);
-
+for (int i = 0; i < world.getCols(); i++){
+	Particle ground(world.getRows() - 1, i, ParticleType::EARTH);
+	world.addParticle(ground);
+}
 //Testing
 //Particle test(5, 5, paintType);
 //world.addParticle(test);
