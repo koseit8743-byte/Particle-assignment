@@ -1,5 +1,6 @@
  #include "Colors.h"
 #include "Particle.h"
+#include <new>
  Color ParticleColor(ParticleType type){
     if (type == ParticleType::AIR){
      Color col = {255, 255, 255};
@@ -34,4 +35,6 @@
      return col;
 
    }
+ Color DefaultC = {255, 255, 255};
+ return DefaultC;
  }

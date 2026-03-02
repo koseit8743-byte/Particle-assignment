@@ -31,11 +31,11 @@ void onMouseDown(int row, int col){
 	g_clickCol = col;
 }
 
-Game::Game() : world(1, 1) {
+Game::Game(){
 	pause=true;
 	frame = 0;
 	fps = 5;
-	SavePath = "world.txt";
+	SaveFile = "world.txt";
 	hudRows = 5;
 
 	paintType = ParticleType::DUST;
@@ -62,7 +62,8 @@ int termCols = terminal.second;
 int worldRows = max(1, termRows - hudRows);
 int worldCols = max(1, termCols);
 
-world = World(worldRows, worldCols);
+world.SetRows(worldRows);
+world.SetColumns(worldCols);
 
 clearscreen();
 movecursor(1,1);
@@ -191,7 +192,7 @@ void Game::commandSAVE(){
 }
 void Game::commandLOAD(){
 	pause = true;
-	world.Load(SavePath);
+	world.Load(SaveFile);
 }
 void Game::commmandFPSup(){
 fps = min(60, fps + 1);
