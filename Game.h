@@ -2,9 +2,11 @@
 
 //World for "World world;" Why? idk
 #include "World.h"
+
 #include "Particle.h"
 #include <string>
 #include "/public/colors.h"
+using namespace std;
 //Previous Header included "NonBlockingGame" from bridges. Upadated to use colors.h
 
 class Game {
