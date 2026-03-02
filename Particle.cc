@@ -220,7 +220,9 @@ void Particle::isTouching(Particle& ParticleType, World& World_Map) {
 } */
 
 void Particle::isTouching(Particle& Particle, World& World_Map) {
+	for (auto& Particle : World_Map.Elements()) {
 	if (this->type == ParticleType::WATER and Particle.getType() == ParticleType::FIRE) { 
+		this->setType(ParticleType::AIR);
 		Particle.setType(ParticleType::AIR);
 	}
 	if (this->type == ParticleType::LIGHTNING and Particle.getType() == ParticleType::WATER) {
@@ -228,6 +230,7 @@ void Particle::isTouching(Particle& Particle, World& World_Map) {
 	}
 	if (this->type == ParticleType::LIGHTNING and Particle.getType() == ParticleType::EARTH) { 
 		Particle.setType(ParticleType::DIRT);
+		}
 	}
 }
 
